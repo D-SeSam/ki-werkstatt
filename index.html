@@ -1,0 +1,3546 @@
+<!doctype html>
+<html lang="de">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deine KI-Werkstatt · KI-Kompass am HPI</title>
+<meta name="description" content="Klären. Entscheiden. Ausprobieren. Die freiwillige Werkstatt zum Online-Kurs KI-Kompass am HPI.">
+<style>
+:root {
+  --blue: #3f00ff;
+  --blue-soft: #a6c5ff;
+  --blue-pale: #ecf3ff;
+  --teal-deep: #014141;
+  --teal: #008585;
+  --cyan: #01dada;
+  --cyan-pale: #b2f4f4;
+  --violet-deep: #450088;
+  --violet: #9f3dff;
+  --violet-pale: #efe7ff;
+  --magenta: #cd0dd0;
+  --pink: #ffa7fc;
+  --rose: #fddce1;
+  --yellow: #fff82a;
+  --yellow-soft: #ffdda7;
+  --green: #00e325;
+  --green-soft: #e7fe9d;
+  --black: #000000;
+  --ink: #2b2b2b;
+  --muted: #6d6d75;
+  --line: #dfdde4;
+  --paper: #ffffff;
+  --mist: #f2f2f7;
+  --shadow: 0 18px 45px rgba(43, 43, 43, 0.08);
+  --shadow-soft: 0 10px 28px rgba(43, 43, 43, 0.06);
+  --r-xl: 30px;
+  --r-lg: 22px;
+  --r-md: 16px;
+  --content: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    linear-gradient(rgba(63, 0, 255, 0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63, 0, 255, 0.034) 1px, transparent 1px),
+    radial-gradient(circle at 8% 8%, rgba(255, 248, 42, 0.26), transparent 20rem),
+    radial-gradient(circle at 92% 6%, rgba(1, 218, 218, 0.18), transparent 23rem),
+    linear-gradient(180deg, #fafafe 0%, #f4f4f8 54%, #ffffff 100%);
+  background-size: 24px 24px, 24px 24px, auto, auto, auto;
+}
+
+button, input, select, textarea { font: inherit; }
+button, a.button { -webkit-tap-highlight-color: transparent; }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.8rem 1rem;
+  background: var(--black);
+  color: white;
+  border-radius: 999px;
+  text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+
+.app {
+  width: min(var(--content), calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 64px;
+}
+
+.eyebrow,
+.small-label,
+.module-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-weight: 950;
+  font-size: 0.74rem;
+  color: var(--violet-deep);
+}
+
+h1, h2, h3 {
+  margin: 0;
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+}
+p { line-height: 1.48; }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 0.78rem 1.05rem;
+  color: white;
+  background: var(--ink);
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.button:hover { transform: translateY(-1px); box-shadow: var(--shadow-soft); }
+.button.primary { background: var(--blue); }
+.button.secondary { background: var(--teal-deep); }
+.button.mini { min-height: 36px; padding: 0.5rem 0.78rem; font-size: 0.86rem; }
+.button.wide { width: 100%; }
+.ghost-btn { background: rgba(43, 43, 43, 0.08); color: var(--ink); }
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(330px, 0.8fr);
+  gap: 24px;
+  align-items: stretch;
+  min-height: unset;
+}
+.hero-copy,
+.outcome-card,
+.panel,
+.framing-card,
+.instruction-strip article,
+.mode-pill,
+.sparring-card,
+.form-section {
+  border: 1px solid rgba(43,43,43,0.12);
+  box-shadow: var(--shadow);
+}
+.hero-copy {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  padding: clamp(34px, 5vw, 56px);
+  background:
+    radial-gradient(circle at 100% 100%, transparent 0 90px, var(--yellow) 91px 116px, transparent 117px),
+    radial-gradient(circle at 13% 18%, rgba(255, 248, 42, 0.22), transparent 17rem),
+    linear-gradient(135deg, #fffdf1 0%, var(--blue-pale) 76%, #e5fbfb 100%);
+}
+.hero-copy > * { position: relative; z-index: 1; }
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  right: -76px;
+  bottom: -82px;
+  width: 230px;
+  height: 230px;
+  border: 25px solid var(--yellow);
+  border-radius: 50%;
+  opacity: 0.95;
+}
+h1 {
+  max-width: 760px;
+  margin-top: 20px;
+  font-size: clamp(4rem, 8.6vw, 7rem);
+  line-height: 0.9;
+  color: var(--ink);
+}
+.lead {
+  max-width: 720px;
+  margin: 24px 0 0;
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: rgba(43,43,43,0.76);
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 26px 0 0;
+}
+.hero-meta span,
+.badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border-radius: 999px;
+  padding: 0.4rem 0.72rem;
+  font-weight: 850;
+  font-size: 0.84rem;
+  color: var(--teal-deep);
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(43,43,43,0.12);
+}
+.hero-actions { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+
+.outcome-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  padding: 30px;
+  background:
+    radial-gradient(circle at 84% -12%, rgba(255,248,42,0.8), transparent 8rem),
+    linear-gradient(155deg, var(--teal-deep) 0%, #143765 42%, var(--violet-deep) 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+.outcome-card .small-label { color: var(--yellow); }
+.outcome-card > h2 {
+  margin-top: 14px;
+  font-size: clamp(2rem, 3.7vw, 3.05rem);
+  line-height: 1;
+  max-width: 10ch;
+}
+.outcome-intro {
+  margin: 16px 0 0;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.98rem;
+  max-width: 36ch;
+}
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 22px 0 4px;
+}
+.how-grid article {
+  padding: 11px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.how-grid strong { display: block; font-size: 0.98rem; }
+.how-grid span { display: block; margin-top: 3px; font-size: 0.76rem; color: rgba(255,255,255,0.72); font-weight: 760; }
+.outcome-list {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.outcome-list article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.outcome-list h3 { margin-bottom: 4px; font-size: 1.18rem; line-height: 1.1; }
+.outcome-list p { margin: 0; color: rgba(255,255,255,0.78); line-height: 1.35; font-size: 0.91rem; }
+.step-dot {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--black); font-weight: 950;
+}
+.step-dot.set { background: var(--blue-soft); }
+.step-dot.choose { background: var(--cyan); }
+.step-dot.challenge { background: var(--pink); }
+
+/* NAV + INTRO */
+.progress-nav {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 22px 0 30px;
+  padding: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.84);
+  border: 1px solid rgba(43,43,43,0.1);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(14px);
+}
+.progress-nav a {
+  min-height: 40px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 900;
+}
+.progress-nav a:hover { background: var(--blue-pale); }
+.progress-nav span {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: white; background: var(--ink); font-size: 0.78rem;
+}
+.framing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 0 0 44px;
+}
+.framing-card {
+  border-radius: var(--r-lg);
+  padding: 24px;
+  min-height: 0;
+}
+.framing-card.light { background: rgba(255,255,255,0.85); }
+.framing-card.dark { background: var(--teal-deep); color: white; }
+.framing-card.dark .small-label { color: var(--cyan); }
+.framing-card h2 { margin-top: 10px; font-size: clamp(1.65rem, 3vw, 2.6rem); line-height: 1.03; max-width: 15ch; }
+.framing-card p { margin: 14px 0 0; max-width: 55ch; color: rgba(43,43,43,0.76); }
+.framing-card.dark p { color: rgba(255,255,255,0.82); }
+
+/* MODULES */
+.module {
+  scroll-margin-top: 94px;
+  margin-top: 56px;
+}
+.module-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.8fr);
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+.module-heading h2 {
+  margin-top: 12px;
+  font-size: clamp(2.35rem, 4vw, 3.6rem);
+  line-height: 1.02;
+  max-width: none;
+  letter-spacing: -0.055em;
+}
+.module-heading > p {
+  margin: 0 0 10px;
+  color: rgba(43,43,43,0.74);
+  font-size: 1.02rem;
+  max-width: 42ch;
+}
+.module-set .module-kicker { color: var(--blue); }
+.module-choose .module-kicker { color: var(--teal); }
+.module-challenge .module-kicker { color: var(--magenta); }
+.module-readiness .module-kicker { color: var(--violet-deep); }
+
+.instruction-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.instruction-strip article {
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.86);
+}
+.instruction-strip strong { display: block; margin-bottom: 5px; font-size: 0.93rem; }
+.instruction-strip span { display: block; color: rgba(43,43,43,0.72); font-weight: 700; line-height: 1.38; font-size: 0.9rem; }
+.module-choose .instruction-strip article { background: linear-gradient(135deg, #ffffff, var(--cyan-pale)); }
+
+.workspace {
+  display: grid;
+  gap: 22px;
+  align-items: start;
+}
+.two-col { grid-template-columns: minmax(0, 0.92fr) minmax(380px, 1.08fr); }
+.choose-layout { grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr); }
+.panel {
+  border-radius: var(--r-lg);
+  background: rgba(255,255,255,0.92);
+  padding: 22px;
+}
+.form-panel { padding: 20px; }
+.sticky-output { position: sticky; top: 92px; }
+.section-note {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 16px;
+  padding: 15px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(63,0,255,0.24);
+  background: var(--blue-pale);
+}
+.section-note strong { font-size: 1.06rem; }
+.section-note span { color: var(--muted); line-height: 1.42; }
+
+/* FORMS */
+.form-section {
+  position: relative;
+  margin: 0 0 16px;
+  padding: 22px 16px 16px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: none;
+}
+.form-section legend {
+  padding: 0 8px;
+  color: var(--blue);
+  font-weight: 950;
+  letter-spacing: -0.02em;
+}
+.form-section:nth-of-type(3) legend { color: var(--teal); }
+.form-section:nth-of-type(4) legend { color: var(--teal); }
+.field-help {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-weight: 720;
+  line-height: 1.38;
+}
+.form-grid,
+.form-grid.compact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+label {
+  display: block;
+  color: var(--ink);
+  font-weight: 900;
+  line-height: 1.25;
+}
+label span.optional { color: var(--muted); font-weight: 700; }
+input, select, textarea {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 8px;
+  border: 1px solid rgba(43,43,43,0.16);
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: white;
+  color: var(--ink);
+  font-weight: 780;
+  outline: none;
+}
+select {
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(63,0,255,0.12);
+}
+textarea { min-height: 94px; resize: vertical; }
+input[type="range"] { padding: 0; border: 0; margin-top: 13px; }
+.rangeHelp { display: block; margin-top: 7px; color: var(--muted); font-weight: 740; font-size: 0.86rem; }
+.rule-box {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff, var(--blue-pale));
+  border: 1px solid rgba(63,0,255,0.22);
+}
+.check {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 9px;
+  align-items: start;
+  font-weight: 780;
+  line-height: 1.35;
+}
+.check input { width: auto; margin: 3px 0 0; accent-color: var(--blue); }
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip {
+  border: 1px solid rgba(43,43,43,0.13);
+  border-radius: 999px;
+  padding: 0.55rem 0.75rem;
+  background: var(--mist);
+  color: var(--ink);
+  font-weight: 850;
+  cursor: pointer;
+}
+.chip:hover { background: var(--blue-pale); }
+
+/* OUTPUTS */
+.output-panel { background: var(--ink); color: white; }
+.outputHeader {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.outputHeader .small-label { color: var(--yellow); }
+.outputHeader h3 { font-size: clamp(1.8rem, 3vw, 2.55rem); line-height: 1; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.tab {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.62rem 0.86rem;
+  color: white;
+  background: rgba(255,255,255,0.13);
+  font-weight: 900;
+  cursor: pointer;
+}
+.tab.active { background: var(--yellow); color: var(--black); }
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  padding: 18px;
+  min-height: 310px;
+  border-radius: 18px;
+  background: #111118;
+  color: #f7f7fb;
+  line-height: 1.5;
+  font-size: 0.93rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* CHOOSE */
+.mode-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0 18px;
+}
+.mode-pill {
+  border-radius: 18px;
+  padding: 14px;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+}
+.mode-pill:hover { transform: translateY(-1px); }
+.mode-pill strong { display: block; font-size: 1rem; }
+.mode-pill span { display: block; margin-top: 5px; color: var(--muted); font-weight: 820; font-size: 0.9rem; }
+.mode-info {
+  margin: 0 0 16px;
+  padding: 16px;
+  border-radius: 18px;
+  color: white;
+  background: var(--teal-deep);
+}
+.mode-info h3 { margin-bottom: 6px; font-size: 1.4rem; }
+.mode-info p { margin: 0; color: rgba(255,255,255,0.84); }
+.dilemma-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.scenario-controls { display: flex; gap: 8px; }
+.scenario-card {
+  border-radius: 22px;
+  padding: 24px;
+  margin-bottom: 14px;
+  color: white;
+  background: var(--teal-deep);
+}
+.scenario-card h3 { font-size: clamp(1.8rem, 3.6vw, 3rem); line-height: 1.02; }
+.scenario-card p { margin: 14px 0 0; color: rgba(255,255,255,0.88); font-size: 1rem; }
+.mode-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 14px;
+}
+.mode-choice button {
+  min-height: 46px;
+  border-radius: 14px;
+  border: 1px solid rgba(43,43,43,0.14);
+  background: #fff;
+  color: var(--ink);
+  font-weight: 900;
+  cursor: pointer;
+}
+.mode-choice button.active,
+.mode-choice button:hover { background: var(--cyan-pale); border-color: var(--cyan); }
+.recommendation-panel { min-height: 100%; }
+.recommendation-panel .small-label { color: var(--violet-deep); }
+.empty-state {
+  min-height: 280px;
+  border-radius: 18px;
+  background: var(--mist);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 860;
+  padding: 18px;
+}
+.reco-card { display: grid; gap: 13px; }
+.reco-card h3 { font-size: 1.7rem; }
+.reco-card .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.reco-card .tag { border-radius: 999px; padding: 0.45rem 0.65rem; background: var(--cyan-pale); font-weight: 900; }
+.reco-card section { padding: 14px; border-radius: 16px; background: var(--mist); }
+.reco-card section strong { display: block; margin-bottom: 4px; }
+.reco-card code { display: block; white-space: pre-wrap; padding: 12px; border-radius: 12px; background: white; color: var(--ink); }
+
+.task-lens {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #fff, var(--cyan-pale));
+}
+.task-lens-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+  gap: 18px;
+  align-items: start;
+}
+.task-lens-intro h3 { margin-top: 8px; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+.task-lens-intro p { max-width: 60ch; color: var(--muted); }
+.task-lens-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.task-lens-grid label:first-child,
+.task-lens-grid label:nth-child(3) { grid-column: 1 / -1; }
+.task-lens-grid button { grid-column: 1 / -1; }
+.task-list-wrap {
+  padding: 15px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(43,43,43,0.12);
+}
+.task-list-head { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.task-list-head span { min-width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--teal-deep); color: white; font-weight: 950; }
+.task-lens-list { display: grid; gap: 8px; }
+.task-lens-list.empty { color: var(--muted); font-weight: 760; }
+.task-item {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 14px;
+  background: white;
+  border: 1px solid rgba(43,43,43,0.12);
+}
+.task-item strong { display: block; }
+.task-item span { color: var(--muted); font-weight: 740; }
+.task-item button { justify-self: start; min-height: 32px; border: 0; border-radius: 999px; padding: 0.35rem 0.65rem; background: var(--mist); font-weight: 850; cursor: pointer; }
+
+/* CHALLENGE */
+.sparring-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0 20px;
+}
+.sparring-card {
+  min-height: 168px;
+  border-radius: 22px;
+  padding: 18px;
+  text-align: left;
+  background: white;
+  cursor: pointer;
+}
+.sparring-card.active,
+.sparring-card:hover { background: var(--violet-pale); border-color: var(--violet); }
+.sparring-card span { color: var(--magenta); font-weight: 950; letter-spacing: 0.08em; }
+.sparring-card h3 { margin: 12px 0 8px; font-size: 1.45rem; }
+.sparring-card p { margin: 0; color: var(--muted); font-weight: 730; }
+.challenge-note { background: var(--violet-pale); border-color: rgba(159,61,255,0.25); }
+
+/* READINESS */
+.readiness-output pre { min-height: 520px; }
+.team-card h3 { font-size: 2rem; margin: 8px 0; }
+.team-card p { color: var(--muted); }
+.team-card form { display: grid; gap: 13px; }
+#teamResult { margin-top: 16px; min-height: 190px; }
+
+/* FOOTER */
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(43,43,43,0.12);
+}
+.site-footer strong { display: block; margin-top: 5px; font-size: 1.1rem; }
+.site-footer img { max-width: 250px; height: auto; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translate(-50%, 140%);
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  color: white;
+  background: var(--ink);
+  font-weight: 900;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+  z-index: 50;
+}
+.toast.show { transform: translate(-50%, 0); }
+
+
+/* Softer placeholders for empty text fields */
+input::placeholder,
+textarea::placeholder {
+  color: #9a9aa4;
+  opacity: 0.62;
+  font-weight: 650;
+}
+
+/* Set module: keep all profile subsections in d-school blue */
+.module-set .form-section legend,
+.module-set .rules-section legend,
+.module-set .optional-section legend {
+  color: var(--blue);
+}
+.module-set .rule-box {
+  background: linear-gradient(135deg, #fff, var(--blue-pale));
+  border-color: rgba(63,0,255,0.22);
+}
+
+@media (max-width: 1000px) {
+  .hero,
+  .two-col,
+  .choose-layout,
+  .framing,
+  .task-lens-body,
+  .module-heading { grid-template-columns: 1fr; }
+  .outcome-card > h2 { max-width: none; }
+  .sticky-output { position: static; }
+  .mode-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sparring-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .app { width: min(100% - 20px, var(--content)); padding-top: 12px; }
+  .hero-copy, .outcome-card, .panel { padding: 18px; border-radius: 22px; }
+  h1 { font-size: clamp(3rem, 18vw, 4.2rem); }
+  .lead { font-size: 1.08rem; }
+  .progress-nav { grid-template-columns: repeat(2, 1fr); border-radius: 22px; position: static; }
+  .framing { margin-bottom: 34px; }
+  .framing-card h2 { max-width: none; }
+  .module { margin-top: 42px; scroll-margin-top: 20px; }
+  .module-heading h2 { max-width: none; font-size: clamp(2.25rem, 11vw, 3.1rem); }
+  .instruction-strip,
+  .form-grid,
+  .form-grid.compact,
+  .task-lens-grid,
+  .mode-choice { grid-template-columns: 1fr; }
+  .mode-strip { grid-template-columns: 1fr; }
+  .how-grid { grid-template-columns: 1fr; }
+  .site-footer { align-items: flex-start; flex-direction: column; }
+  .site-footer img { max-width: 210px; }
+}
+
+/* v5 usability refinements */
+.app {
+  width: min(1120px, calc(100% - 34px));
+  padding-bottom: 88px;
+}
+
+.hero {
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  margin-bottom: 18px;
+}
+.hero-copy,
+.outcome-card {
+  min-height: 520px;
+}
+.outcome-card > h2 {
+  max-width: 11.5ch;
+  font-size: clamp(2.05rem, 3.1vw, 3.25rem);
+  letter-spacing: -0.055em;
+}
+.outcome-intro {
+  max-width: 42ch;
+}
+
+.progress-nav {
+  margin: 18px 0 34px;
+}
+
+.module {
+  position: relative;
+  margin-top: 34px;
+  padding: clamp(22px, 3vw, 34px);
+  border: 1px solid rgba(43,43,43,0.10);
+  border-radius: 32px;
+  box-shadow: 0 18px 50px rgba(43,43,43,0.055);
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(3px);
+}
+.module + .module { margin-top: 48px; }
+.module-set { background: linear-gradient(180deg, rgba(236,243,255,0.78), rgba(255,255,255,0.86)); }
+.module-choose { background: linear-gradient(180deg, rgba(178,244,244,0.54), rgba(255,255,255,0.88)); }
+.module-challenge { background: linear-gradient(180deg, rgba(239,231,255,0.64), rgba(255,255,255,0.9)); }
+.module-readiness { background: linear-gradient(180deg, rgba(255,221,167,0.36), rgba(255,255,255,0.9)); }
+
+.module-heading {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.module-heading h2 {
+  max-width: 100%;
+  font-size: clamp(2.8rem, 6.2vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+.module-heading > p {
+  max-width: 62ch;
+  margin: 0;
+  font-size: 1.03rem;
+  line-height: 1.52;
+  color: rgba(43,43,43,0.74);
+}
+
+.instruction-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+.instruction-strip article {
+  min-height: 0;
+  padding: 14px 15px;
+  border-radius: 18px;
+  box-shadow: none;
+  background: rgba(255,255,255,0.76);
+}
+.instruction-strip strong { font-size: 0.92rem; }
+.instruction-strip span { font-size: 0.88rem; line-height: 1.35; }
+.module-set .instruction-strip article { background: linear-gradient(135deg, #fff, var(--blue-pale)); }
+.module-choose .instruction-strip article { background: linear-gradient(135deg, #fff, var(--cyan-pale)); }
+.module-challenge .instruction-strip article { background: linear-gradient(135deg, #fff, var(--violet-pale)); }
+.module-readiness .instruction-strip article { background: linear-gradient(135deg, #fff, var(--yellow-soft)); }
+
+.two-col { grid-template-columns: minmax(0, 0.95fr) minmax(370px, 1.05fr); }
+.workspace { gap: 20px; }
+.panel { box-shadow: 0 12px 34px rgba(43,43,43,0.065); }
+.form-panel { padding: 18px; }
+.sticky-output { top: 84px; }
+.section-note {
+  margin-bottom: 14px;
+  padding: 15px 16px;
+  background: rgba(255,255,255,0.72);
+  border-left: 7px solid var(--blue);
+  border-color: rgba(63,0,255,0.22);
+}
+.section-note strong { font-size: 1.06rem; }
+.section-note span { max-width: 55ch; }
+
+.form-section {
+  margin: 0 0 14px;
+  padding: 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(43,43,43,0.10);
+  background: rgba(255,255,255,0.88);
+}
+.form-section legend {
+  padding: 0 8px;
+  background: transparent;
+  font-size: 0.98rem;
+}
+.form-grid,
+.form-grid.compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.form-grid label:first-child { grid-column: 1 / -1; }
+.form-grid label:first-child input[type="range"] { max-width: 360px; }
+input, select, textarea {
+  padding: 11px 13px;
+  border-radius: 14px;
+  font-weight: 760;
+}
+textarea { min-height: 82px; }
+.field-help { font-size: 0.94rem; margin-bottom: 13px; }
+.rule-box {
+  gap: 8px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(236,243,255,0.9), rgba(178,244,244,0.78));
+}
+.check { font-size: 0.93rem; line-height: 1.34; }
+.optional-section label + .chip-group,
+.optional-section .chip-group { margin-top: 14px; }
+.chip { font-size: 0.88rem; }
+
+.output-panel {
+  border-radius: 24px;
+  background: #272727;
+}
+.outputHeader h3 { font-size: clamp(1.8rem, 3.2vw, 2.65rem); }
+pre { min-height: 330px; }
+
+.mode-strip {
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  gap: 9px;
+  margin: 16px 0;
+}
+.mode-pill { box-shadow: none; padding: 13px; }
+.mode-info {
+  padding: 14px 16px;
+  border-radius: 18px;
+  box-shadow: none;
+}
+.mode-info h3 { font-size: 1.18rem; }
+.mode-info p { line-height: 1.38; }
+.choose-layout { grid-template-columns: minmax(0, 0.9fr) minmax(380px, 1.1fr); }
+.scenario-card {
+  padding: 22px;
+  border-radius: 20px;
+}
+.scenario-card h3 { font-size: clamp(2rem, 3.5vw, 3rem); }
+.mode-choice { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.mode-choice button { min-height: 44px; }
+.recommendation-panel { background: rgba(255,255,255,0.94); }
+.reco-card { display: grid; gap: 14px; color: var(--ink); }
+.reco-summary {
+  display: grid;
+  grid-template-columns: minmax(0,0.85fr) minmax(0,1.15fr);
+  gap: 12px;
+  align-items: start;
+  padding: 15px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--blue-pale), #fff);
+  border: 1px solid rgba(63,0,255,0.16);
+}
+.reco-summary h3 {
+  margin-top: 5px;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  line-height: 1.02;
+}
+.reco-summary p,
+.user-choice p { margin: 6px 0 0; color: var(--muted); }
+.user-choice span,
+.reco-label {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: .11em;
+  font-size: .72rem;
+  color: var(--violet-deep);
+  font-weight: 950;
+  margin-bottom: 5px;
+}
+.user-choice strong { display: block; font-size: 1.05rem; }
+.reco-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 10px;
+}
+.reco-grid section,
+.reco-prompt {
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--mist);
+  border: 1px solid rgba(43,43,43,0.08);
+}
+.reco-grid p,
+.reco-prompt p { margin: 0; line-height: 1.45; }
+.reco-prompt {
+  background: #111118;
+  color: #fff;
+}
+.reco-prompt .reco-label { color: var(--yellow); }
+
+.task-lens {
+  margin-top: 22px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(178,244,244,0.65));
+}
+.task-lens-body {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
+  gap: 16px;
+}
+.task-lens-intro h3 { font-size: clamp(1.7rem, 3vw, 2.4rem); }
+.task-lens-intro p { margin-bottom: 14px; }
+.task-lens-grid { grid-template-columns: 1fr; }
+.task-list-wrap { background: white; }
+.task-item {
+  position: relative;
+  padding: 13px 42px 13px 13px;
+}
+.task-item button,
+.task-remove {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--mist);
+}
+
+.sparring-grid { gap: 12px; }
+.sparring-card { min-height: 150px; box-shadow: none; }
+.sparring-card h3 { font-size: 1.35rem; }
+.challenge-note { border-left-color: var(--magenta); }
+
+.site-footer {
+  margin-top: 54px;
+  padding: 28px 0 36px;
+  border-top: 1px solid rgba(43,43,43,0.12);
+}
+.site-footer div span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-weight: 720;
+}
+.site-footer img {
+  display: block;
+  max-width: 205px;
+  max-height: 70px;
+  object-fit: contain;
+}
+
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-copy, .outcome-card { min-height: unset; }
+  .module { padding: 22px; }
+  .two-col,
+  .choose-layout,
+  .task-lens-body { grid-template-columns: 1fr; }
+  .sticky-output { position: static; }
+  .mode-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reco-summary, .reco-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .instruction-strip,
+  .form-grid,
+  .mode-strip,
+  .mode-choice { grid-template-columns: 1fr; }
+  .module-heading h2 { font-size: clamp(2.35rem, 13vw, 3.4rem); }
+  .hero-copy::after { opacity: .45; }
+}
+
+/* v6 final usability pass: calmer typography, cleaner German labels, integrated footer */
+:root {
+  --content: 1160px;
+}
+
+body {
+  background-size: 26px 26px, 26px 26px, auto, auto, auto;
+}
+
+.hero-copy,
+.outcome-card {
+  min-height: 500px;
+}
+
+h1 {
+  font-size: clamp(3.35rem, 6.7vw, 5.85rem);
+  line-height: 0.95;
+  letter-spacing: -0.058em;
+  max-width: 7.4ch;
+}
+
+.lead {
+  max-width: 620px;
+  font-size: clamp(1.08rem, 1.75vw, 1.42rem);
+  line-height: 1.32;
+}
+
+.outcome-card {
+  padding: clamp(26px, 3vw, 34px);
+}
+
+.outcome-card > h2 {
+  max-width: 13.5ch;
+  font-size: clamp(1.9rem, 2.55vw, 2.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+}
+
+.outcome-list article {
+  padding: 13px;
+}
+
+.outcome-list h3 {
+  font-size: 1.08rem;
+}
+
+.progress-nav a {
+  font-size: 0.94rem;
+}
+
+.module {
+  padding: clamp(24px, 3.2vw, 38px);
+}
+
+.module-heading h2 {
+  font-size: clamp(2.45rem, 4.7vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.module-heading > p {
+  max-width: 60ch;
+  font-size: 1rem;
+}
+
+.instruction-strip article {
+  border-radius: 16px;
+  padding: 13px 14px;
+}
+
+.instruction-strip strong {
+  font-size: 0.9rem;
+}
+
+.instruction-strip span {
+  font-size: 0.85rem;
+  line-height: 1.34;
+}
+
+.form-panel {
+  padding: 18px;
+}
+
+.section-note {
+  border-left-width: 6px;
+  background: rgba(255,255,255,0.82);
+}
+
+.form-section {
+  padding: 18px 16px 17px;
+}
+
+.form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 14px;
+}
+
+.form-grid label {
+  min-width: 0;
+}
+
+.form-grid label:first-child {
+  grid-column: 1 / -1;
+}
+
+.form-grid label:first-child input[type="range"] {
+  max-width: 420px;
+}
+
+label {
+  font-size: 0.96rem;
+}
+
+input,
+select,
+textarea {
+  font-size: 0.93rem;
+  line-height: 1.2;
+  font-weight: 750;
+  min-width: 0;
+}
+
+select {
+  height: 46px;
+  white-space: nowrap;
+}
+
+.rule-box {
+  background: linear-gradient(135deg, rgba(236,243,255,0.95), rgba(178,244,244,0.62));
+}
+
+.check {
+  font-size: 0.91rem;
+}
+
+.outputHeader h3 {
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+}
+
+pre {
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
+.mode-strip {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.mode-pill strong {
+  font-size: 0.96rem;
+}
+
+.mode-pill span {
+  font-size: 0.84rem;
+}
+
+.scenario-card h3 {
+  font-size: clamp(1.8rem, 3vw, 2.55rem);
+}
+
+.recommendation-panel {
+  background: rgba(255,255,255,0.96);
+}
+
+.reco-summary {
+  grid-template-columns: 0.72fr 1.28fr;
+  background: linear-gradient(135deg, rgba(236,243,255,0.92), #fff);
+}
+
+.reco-summary h3 {
+  font-size: clamp(1.45rem, 2.15vw, 1.9rem);
+}
+
+.reco-grid section {
+  background: #f6f6fa;
+}
+
+.reco-prompt {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid rgba(43,43,43,0.12);
+}
+
+.reco-prompt .reco-label {
+  color: var(--violet-deep);
+}
+
+.reco-prompt p {
+  margin-top: 8px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: #111118;
+  color: #f7f7fb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+  line-height: 1.48;
+}
+
+.task-lens {
+  border-color: rgba(1,218,218,0.25);
+}
+
+.task-lens-intro h3 {
+  letter-spacing: -0.035em;
+}
+
+.sparring-card h3 {
+  letter-spacing: -0.035em;
+}
+
+.site-footer {
+  margin-top: 56px;
+  padding: 22px 26px;
+  border: 1px solid rgba(43,43,43,0.12);
+  border-radius: 26px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: var(--shadow-soft);
+}
+
+.site-footer img {
+  max-width: 190px;
+}
+
+@media (max-width: 1050px) {
+  h1 {
+    max-width: 8.5ch;
+  }
+  .outcome-card > h2 {
+    max-width: none;
+  }
+  .mode-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  h1 {
+    font-size: clamp(3rem, 16vw, 4.35rem);
+  }
+  .module-heading h2 {
+    font-size: clamp(2.25rem, 11vw, 3.25rem);
+  }
+  .form-grid,
+  .instruction-strip,
+  .reco-summary,
+  .reco-grid {
+    grid-template-columns: 1fr;
+  }
+  .site-footer {
+    padding: 20px;
+  }
+}
+
+/* final polish: clearer labels, better spacing, fewer awkward breaks */
+h1 {
+  font-size: clamp(3rem, 5.8vw, 5.25rem);
+  line-height: 1;
+  max-width: 8.4ch;
+}
+.outcome-card > h2 {
+  max-width: 15ch;
+  font-size: clamp(1.8rem, 2.35vw, 2.55rem);
+}
+.module-heading h2 {
+  font-size: clamp(2.15rem, 4.1vw, 3.7rem);
+  letter-spacing: -0.045em;
+}
+.form-section legend,
+.optional-section legend {
+  color: var(--blue) !important;
+}
+#profileForm .form-grid {
+  grid-template-columns: 1fr;
+  gap: 13px;
+}
+#profileForm .form-grid label:first-child input[type="range"] {
+  max-width: 100%;
+}
+#profileForm select {
+  width: 100%;
+}
+#sparringForm label {
+  display: block;
+  margin: 0 0 16px;
+}
+#sparringForm textarea {
+  display: block;
+  margin-top: 8px;
+  min-height: 96px;
+}
+#sparringForm .button {
+  margin-top: 2px;
+}
+.reco-prompt {
+  padding: 16px;
+}
+.reco-prompt .prompt-box {
+  margin: 9px 0 0;
+  padding: 14px 15px;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #111118;
+  color: #f7f7fb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+.reco-prompt p { display: none; }
+.task-lens-intro h3,
+.sparring-card h3 {
+  letter-spacing: -0.03em;
+}
+.site-footer {
+  margin-top: 38px;
+  background: linear-gradient(135deg, rgba(236,243,255,0.9), rgba(255,255,255,0.92));
+  border-left: 7px solid var(--blue);
+  align-items: center;
+}
+.site-footer .small-label {
+  color: var(--blue);
+}
+@media (max-width: 760px) {
+  h1 { max-width: 7.6ch; }
+  .module-heading h2 { font-size: clamp(2rem, 10vw, 3rem); }
+}
+
+/* final color consistency pass */
+:root {
+  --set-main: #3F00FF;
+  --set-soft: #A6C5FF;
+  --set-pale: #ECF3FF;
+  --choose-main: #008585;
+  --choose-deep: #014141;
+  --choose-soft: #B2F4F4;
+  --challenge-main: #CD0DD0;
+  --challenge-deep: #450088;
+  --challenge-soft: #EFE7FF;
+  --ds-yellow: #FFF82A;
+  --ds-yellow-soft: #FFDDA7;
+}
+
+.hero-copy::after {
+  border-color: var(--ds-yellow);
+}
+.hero-meta span:first-child,
+.outcome-card .small-label {
+  color: var(--ds-yellow);
+}
+
+/* Set = d-school blue */
+.module-set .module-kicker,
+.module-set .form-section legend,
+.module-set .small-label,
+.module-set .optional-section legend {
+  color: var(--set-main) !important;
+}
+.module-set .section-note {
+  border-color: rgba(63,0,255,0.34) !important;
+  border-left-color: var(--set-main) !important;
+  background: linear-gradient(135deg, #fff, var(--set-pale));
+}
+.module-set .form-section:focus-within,
+.module-set input:focus,
+.module-set select:focus,
+.module-set textarea:focus {
+  border-color: var(--set-main) !important;
+  box-shadow: 0 0 0 3px rgba(63,0,255,0.14) !important;
+}
+.module-set input[type="range"] {
+  accent-color: var(--set-main);
+}
+.module-set input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--set-main), var(--set-soft));
+}
+.module-set input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--set-main);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px rgba(63,0,255,0.22);
+}
+.module-set input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--set-soft);
+}
+.module-set input[type="range"]::-moz-range-progress {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--set-main);
+}
+.module-set input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--set-main);
+  border: 3px solid #fff;
+}
+
+/* Choose = teal / green family */
+.module-choose .module-kicker,
+.module-choose .small-label,
+.module-choose .reco-label,
+.module-choose .user-choice span {
+  color: var(--choose-main) !important;
+}
+.module-choose .scenario-card,
+.module-choose .mode-info {
+  background: var(--choose-deep);
+}
+.module-choose .mode-choice button.active,
+.module-choose .mode-choice button:hover {
+  background: var(--choose-soft);
+  border-color: var(--choose-main);
+  color: var(--ink);
+}
+.module-choose .button.primary,
+.module-choose .button.secondary {
+  background: var(--choose-deep);
+}
+.module-choose .button.primary:hover,
+.module-choose .button.secondary:hover {
+  background: var(--choose-main);
+}
+.module-choose .reco-summary {
+  border-color: rgba(0,133,133,0.22);
+  background: linear-gradient(135deg, rgba(178,244,244,0.62), #fff);
+}
+.module-choose .reco-grid section,
+.module-choose .reco-prompt {
+  border-color: rgba(0,133,133,0.16);
+}
+.module-choose .task-lens {
+  border-color: rgba(0,133,133,0.24);
+  background: linear-gradient(135deg, rgba(255,255,255,0.94), rgba(178,244,244,0.62));
+}
+.module-choose .task-list-head span {
+  background: var(--choose-deep);
+}
+
+/* Challenge = magenta / violet family */
+.module-challenge .module-kicker,
+.module-challenge .small-label,
+.module-challenge .sparring-card span,
+.module-challenge .form-section legend {
+  color: var(--challenge-main) !important;
+}
+.module-challenge .instruction-strip article,
+.module-challenge .challenge-note {
+  background: linear-gradient(135deg, #fff, var(--challenge-soft));
+  border-color: rgba(205,13,208,0.22) !important;
+  border-left-color: var(--challenge-main) !important;
+}
+.module-challenge .sparring-card.active,
+.module-challenge .sparring-card:hover {
+  background: linear-gradient(135deg, #fff, var(--challenge-soft));
+  border-color: var(--challenge-main);
+}
+.module-challenge .button.primary {
+  background: var(--challenge-main);
+}
+.module-challenge .button.primary:hover {
+  background: var(--challenge-deep);
+}
+.module-challenge input:focus,
+.module-challenge select:focus,
+.module-challenge textarea:focus {
+  border-color: var(--challenge-main) !important;
+  box-shadow: 0 0 0 3px rgba(205,13,208,0.13) !important;
+}
+
+/* More integrated footer */
+.site-footer {
+  background: linear-gradient(135deg, var(--set-pale), rgba(255,255,255,0.96));
+  border: 1px solid rgba(63,0,255,0.14);
+  border-left: 8px solid var(--set-main);
+  border-radius: 28px;
+  padding: 24px 28px;
+  box-shadow: var(--shadow-soft);
+}
+.site-footer img {
+  max-width: 185px;
+}
+
+@media (max-width: 760px) {
+  .site-footer {
+    align-items: flex-start;
+  }
+}
+
+/* range rendering consistency */
+.module-set input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+/* final pass requested: hero copy, consistent output labels, prompt copy, readiness color */
+.hero .eyebrow {
+  color: var(--violet-deep);
+}
+.outcome-card {
+  justify-content: flex-start;
+}
+.outcome-card > h2 {
+  margin-top: 0 !important;
+}
+.outcome-intro {
+  max-width: 39ch;
+}
+.hero-meta span:first-child {
+  background: var(--ds-yellow) !important;
+  color: var(--ink) !important;
+  border-color: rgba(43,43,43,0.13) !important;
+}
+.hero-meta span:not(:first-child) {
+  color: var(--teal-deep);
+}
+.output-panel .small-label,
+.module-set .output-panel .small-label,
+.module-challenge .output-panel .small-label,
+.module-readiness .output-panel .small-label {
+  color: var(--ds-yellow) !important;
+}
+.reco-prompt-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+}
+.reco-prompt-head .reco-label {
+  margin: 0;
+}
+.reco-prompt .copy-reco-prompt {
+  min-height: 34px;
+  padding: 0.45rem 0.75rem;
+  background: var(--choose-deep);
+  color: #fff;
+}
+.reco-prompt .copy-reco-prompt:hover {
+  background: var(--choose-main);
+}
+.module-readiness .button.primary,
+.module-readiness .button.secondary,
+.module-readiness #teamCharterForm .button {
+  background: var(--ds-yellow-soft) !important;
+  color: var(--ink) !important;
+  border: 1px solid rgba(43,43,43,0.12);
+}
+.module-readiness .button.primary:hover,
+.module-readiness .button.secondary:hover,
+.module-readiness #teamCharterForm .button:hover {
+  background: var(--ds-yellow) !important;
+}
+.site-footer span {
+  color: var(--muted);
+}
+@media (max-width: 760px) {
+  .outcome-card > h2 {
+    max-width: none;
+  }
+}
+
+/* Final interaction polish: keep mode descriptions on the answer buttons instead of a separate glossary strip. */
+.mode-choice button {
+  position: relative;
+  min-height: 54px;
+  padding: 12px 14px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+.mode-choice button strong {
+  display: block;
+  font-weight: 900;
+}
+.mode-choice button span {
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-2px);
+  color: var(--muted);
+  font-size: 0.83rem;
+  line-height: 1.32;
+  font-weight: 760;
+  transition: max-height .18s ease, opacity .18s ease, transform .18s ease, margin-top .18s ease;
+}
+.mode-choice button:hover span,
+.mode-choice button:focus-visible span,
+.mode-choice button.active span {
+  max-height: 90px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 6px;
+}
+.mode-choice button:hover,
+.mode-choice button:focus-visible,
+.mode-choice button.active {
+  align-items: flex-start;
+}
+
+/* Context section is now deliberately simple: no duplicate quick-rule chips. */
+.optional-section .chip-group { display: none; }
+
+
+/* final micro-polish: both hero meta badges use the same neutral treatment */
+.hero-meta span:first-child {
+  background: rgba(255,255,255,0.78) !important;
+  color: var(--teal-deep) !important;
+  border-color: rgba(43,43,43,0.12) !important;
+}
+
+/* Final bridge polish: quality rules belong to Set/blue; project output replaces old team-charter block. */
+.rule-box {
+  background: linear-gradient(135deg, rgba(236,243,255,0.98), rgba(166,197,255,0.28)) !important;
+  border-color: rgba(63,0,255,0.22) !important;
+}
+.rule-box input[type="checkbox"] {
+  accent-color: var(--blue);
+}
+.project-card pre {
+  margin-top: 14px;
+  min-height: 420px;
+}
+.outputHeader.light .small-label {
+  color: var(--violet-deep);
+}
+.outputHeader.light h3 {
+  color: var(--ink);
+}
+.project-card .button.secondary {
+  background: var(--blue) !important;
+  color: #fff !important;
+}
+.project-card .button.secondary:hover {
+  background: #2f00bf !important;
+}
+
+/* Feedback update: cleaner setup output and standalone readiness card */
+.single-col { grid-template-columns: minmax(0, 1fr); }
+.module-readiness .single-col { max-width: 820px; }
+.output-actions { display: flex; gap: 8px; align-items: center; }
+.button.ghost-dark { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.14); }
+.button.ghost-dark:hover { background: rgba(255,255,255,0.16); }
+.output-hint { margin: -2px 0 12px; color: rgba(255,255,255,0.72); font-size: 0.85rem; line-height: 1.35; }
+.empty-state .disclaimer, .reco-disclaimer { color: var(--muted); font-weight: 760; font-size: 0.88rem; line-height: 1.45; margin-top: 10px; }
+.reco-disclaimer { margin: 12px 0 14px; padding: 10px 12px; border-radius: 14px; background: rgba(0,133,133,0.08); border: 1px solid rgba(0,133,133,0.16); }
+
+/* V3 feedback polish: clearer transfer, full-width readiness card, visible version */
+.module-readiness .single-col {
+  max-width: none !important;
+  width: 100%;
+}
+.readiness-output {
+  width: 100%;
+}
+.readiness-output pre {
+  min-height: 500px;
+  max-height: none;
+}
+.readiness-purpose {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 18px;
+}
+.readiness-purpose article {
+  border: 1px solid rgba(255, 221, 167, 0.52);
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.82);
+}
+.readiness-purpose strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.readiness-purpose span {
+  display: block;
+  color: var(--muted);
+  font-weight: 720;
+  line-height: 1.35;
+  font-size: 0.92rem;
+}
+.site-footer .version-label {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 760;
+}
+@media (max-width: 760px) {
+  .readiness-purpose { grid-template-columns: 1fr; }
+}
+
+</style>
+<style>
+/* ===== Deine KI-Werkstatt: Ergänzungen zum Sprint-Design ===== */
+:root { --assist-main: #2f00bf; --assist-pale: #e9e3ff; --ok: #00504f; --ok-bg: #dff5f2; --warn: #5a4700; --warn-bg: #fff6c7; --no: #3a3550; --no-bg: #ecebf2; }
+
+/* Zugänglichkeit */
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible, .tab:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.module:focus, h3[tabindex]:focus { outline: none; }
+.placeholder { background: var(--yellow); color: var(--ink); padding: 0 .3rem; border-radius: .3rem; font-weight: 850; }
+a { color: var(--blue); font-weight: 850; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
+
+/* Breiten: kein seitliches Scrollen auf dem Handy */
+.app, .module, .workspace > *, .panel, .module-heading, .module-heading > div { min-width: 0; }
+.module-heading h2, .outcome-card > h2 { overflow-wrap: break-word; hyphens: auto; }
+h1 { hyphens: manual; overflow-wrap: break-word; }
+.two-col { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+.choose-layout { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+.task-lens-body { grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr); }
+
+/* Hero */
+h1 { max-width: none; }
+.hero-meta span { color: var(--teal-deep) !important; }
+
+/* Bevor du startest */
+.rules-strip { margin: 0 0 6px; padding: 18px 20px; border-radius: 24px; background: rgba(255,255,255,.88); border: 1px solid rgba(43,43,43,.1); box-shadow: var(--shadow-soft); }
+.rules-strip h2.small-label { color: var(--violet-deep); margin-bottom: 10px; letter-spacing: .13em; line-height: 1.2; }
+.rules-strip ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.rules-strip li { padding: 12px 14px; border-radius: 16px; background: var(--mist); font-size: .9rem; line-height: 1.4; color: rgba(43,43,43,.82); font-weight: 650; }
+.rules-strip li strong { display: block; color: var(--ink); margin-bottom: 3px; font-weight: 900; }
+
+/* Navigation: fünf Stationen, aktuelle markiert */
+.progress-nav { grid-template-columns: repeat(5, 1fr); }
+.progress-nav a[aria-current] { background: var(--ink); color: #fff; }
+.progress-nav a[aria-current] span { background: var(--yellow); color: var(--ink); }
+
+/* Formulare */
+.plain-fs { border: 0; padding: 0; margin: 0 0 14px; min-width: 0; }
+.plain-fs legend { padding: 0; margin-bottom: 9px; font-weight: 900; font-size: .96rem; color: var(--ink); }
+label { margin-bottom: 12px; }
+.check { margin-bottom: 0; }
+.field-help.small { font-size: .86rem; margin: 6px 0 0; }
+.field-help.strong { color: var(--ink); font-weight: 850; }
+.msg { color: #8a1c1c; font-weight: 850; min-height: 1.2em; margin: 4px 0 8px; }
+pre { min-height: 0; }
+.output-panel pre { min-height: 260px; }
+.output-panel .q-pre, .reco-prompt pre, .mini-out pre { min-height: 0; }
+
+/* Station 1 */
+.card-sec legend { color: var(--blue) !important; }
+.card-field + .card-field { margin-top: 16px; }
+.card-field label { margin-bottom: 4px; }
+.card-field textarea { margin-top: 6px; }
+.example { margin: 4px 0 0; padding: 8px 11px; border-radius: 12px; background: var(--blue-pale); color: rgba(43,43,43,.82); font-size: .86rem; line-height: 1.4; font-weight: 650; }
+.example span { display: inline-block; margin-right: 4px; font-weight: 950; text-transform: uppercase; letter-spacing: .1em; font-size: .68rem; color: var(--blue); }
+.add-chips { margin: 8px 0 0; gap: 6px; }
+.add-chips .chip { font-size: .82rem; padding: .42rem .65rem; text-align: left; }
+.fit-note { margin: 10px 0 0; font-weight: 800; color: var(--teal-deep); min-height: 1em; }
+.check-out { margin-top: 12px; }
+.soft-out { padding: 13px 15px; border-radius: 16px; background: var(--mist); border: 1px solid rgba(43,43,43,.08); }
+.soft-out ul, .warn-box ul { margin: 0; padding-left: 1.1rem; }
+.soft-out li, .warn-box li { margin: .25rem 0; line-height: 1.42; font-weight: 650; }
+.soft-out:empty { display: none; }
+.warn-box { margin-top: 12px; padding: 12px 14px; border-radius: 16px; background: var(--warn-bg); border: 1px solid #8a6d00; color: var(--warn); }
+.warn-box strong { display: block; margin-bottom: 4px; }
+.tabs .tab:focus-visible { outline-color: var(--yellow); }
+
+/* Station 2 */
+.scen-dots { display: flex; gap: 6px; margin: -4px 0 12px; }
+.sdot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--choose-main); background: #fff; }
+.sdot.done { background: var(--choose-main); }
+.sdot.now { background: var(--yellow); border-color: var(--ink); }
+.scen-area { margin: 0 0 8px !important; font-size: .74rem !important; font-weight: 950; letter-spacing: .13em; text-transform: uppercase; color: var(--cyan) !important; }
+.scenario-card h3 { outline: none; }
+.know-h { margin: 16px 0 6px !important; font-weight: 900; color: #fff !important; font-size: .92rem !important; }
+.scenario-card ul { margin: 0; padding-left: 1.1rem; }
+.scenario-card li { margin: .3rem 0; line-height: 1.42; color: rgba(255,255,255,.9); font-size: .95rem; }
+.mode-choice, .bs-grid, .out-choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.bs-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.out-choice { grid-template-columns: 1fr; }
+.mode-opt { position: relative; display: flex; gap: 10px; align-items: flex-start; margin: 0; padding: 11px 13px; border-radius: 14px; border: 1px solid rgba(43,43,43,.16); background: #fff; cursor: pointer; font-weight: 800; }
+.mode-opt input { width: 18px; height: 18px; margin: 2px 0 0; flex: none; accent-color: var(--choose-deep); }
+.mode-opt span { display: block; min-width: 0; }
+.mode-opt strong { display: block; font-weight: 900; line-height: 1.2; }
+.mode-opt em { display: block; font-style: normal; font-weight: 800; font-size: .86rem; color: var(--teal-deep); margin-top: 1px; }
+.mode-opt small { display: block; margin-top: 4px; font-size: .82rem; line-height: 1.3; color: var(--muted); font-weight: 720; }
+.mode-opt:hover { border-color: var(--choose-main); }
+.mode-opt:has(input:checked) { background: var(--choose-soft); border-color: var(--choose-main); box-shadow: inset 0 0 0 1px var(--choose-main); }
+.mode-opt:has(input:checked) small { color: #34343c; }
+.mode-opt:has(input:focus-visible) { outline: 3px solid var(--ink); outline-offset: 2px; }
+.mode-opt.slim strong { font-weight: 800; }
+.chip-group { margin-bottom: 4px; }
+.chip-check { position: relative; display: inline-flex; margin: 0; cursor: pointer; }
+.chip-check input { position: absolute; left: 0; top: 0; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.chip-check span { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(43,43,43,.18); border-radius: 999px; padding: .5rem .8rem; background: var(--mist); font-weight: 800; font-size: .87rem; line-height: 1.25; }
+.chip-check span::before { content: "+"; font-weight: 950; color: var(--teal-deep); }
+.chip-check input:checked + span { background: var(--choose-soft); border-color: var(--choose-main); }
+.chip-check input:checked + span::before { content: "✓"; }
+.chip-check input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
+#choiceReason { min-height: 0; }
+.empty-state > div p { margin: 0; }
+.empty-state .disclaimer { margin-top: 10px !important; }
+.st-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; padding: .22rem .6rem; border-radius: 999px; font-weight: 900; font-size: .84rem; border: 1.5px solid; }
+.st-gut { background: var(--ok-bg); color: var(--ok); border-color: var(--teal); }
+.st-bedingt { background: var(--warn-bg); color: var(--warn); border-color: #8a6d00; }
+.st-nicht { background: var(--no-bg); color: var(--no); border-color: #6b6683; }
+.reco-main, .reco-reasons { padding: 14px; border-radius: 16px; background: #fff; border: 1px solid rgba(0,133,133,.2); }
+.reco-main p, .reco-reasons p { margin: 0; line-height: 1.45; }
+.reasons { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.reasons li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; align-items: start; line-height: 1.38; }
+.r-sym { width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 950; font-size: .8rem; }
+.r-ok .r-sym { background: var(--ok-bg); color: var(--ok); }
+.r-warn .r-sym { background: var(--warn-bg); color: var(--warn); }
+.r-no .r-sym { background: var(--no-bg); color: var(--no); }
+.r-open .r-sym { background: var(--mist); color: var(--ink); }
+.why { display: block; margin-top: 2px; color: var(--muted); font-size: .88rem; font-weight: 700; }
+.req-line { margin-top: 10px !important; padding-top: 10px; border-top: 1px dashed rgba(43,43,43,.18); font-size: .92rem; }
+.prompt-note { display: block !important; margin: 8px 0 0 !important; padding: 0 !important; background: none !important; color: var(--muted) !important; font-family: inherit !important; font-size: .84rem !important; font-weight: 750; }
+.reco-next { display: flex; justify-content: flex-end; }
+.reco-summary h3 { outline: none; }
+.req-note { margin: -4px 0 12px; font-size: .88rem; color: var(--teal-deep); font-weight: 750; line-height: 1.4; }
+.take-card { justify-self: start; margin: -6px 0 12px; }
+.task-item p { margin: 3px 0 0; color: var(--muted); font-weight: 720; font-size: .9rem; }
+.task-lens-grid { gap: 0; }
+
+/* Station 3 */
+.module-assist { background: linear-gradient(180deg, rgba(233,227,255,.7), rgba(255,255,255,.9)); }
+.module-assist .module-kicker, .module-assist .form-section legend { color: var(--assist-main) !important; }
+.module-assist .instruction-strip article { background: linear-gradient(135deg, #fff, var(--assist-pale)); }
+.module-assist .button.primary { background: var(--assist-main); }
+.module-assist .mode-opt input { accent-color: var(--assist-main); }
+.module-assist .mode-opt:hover { border-color: var(--assist-main); }
+.module-assist .mode-opt:has(input:checked) { background: var(--assist-pale); border-color: var(--assist-main); box-shadow: inset 0 0 0 1px var(--assist-main); }
+.module-assist .after-panel .small-label { color: var(--assist-main); }
+#assistFromCard textarea { min-height: 0; }
+.after-panel { margin-top: 20px; }
+.after-panel > h3 { margin: 6px 0 14px; font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+.after-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.rkb { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 18px; }
+.rkb article { padding: 12px 14px; border-radius: 16px; background: var(--assist-pale); border: 1px solid rgba(47,0,191,.18); }
+.rkb strong { display: block; font-size: 1.05rem; }
+.rkb span { display: block; color: rgba(43,43,43,.8); font-weight: 720; font-size: .9rem; }
+.diag { margin-top: 4px; padding: 14px 16px; border-radius: 16px; background: var(--ink); color: #fff; }
+.diag strong { color: var(--yellow); font-size: 1.05rem; }
+.diag p { margin: 6px 0 0; color: rgba(255,255,255,.9); }
+.mini-out { margin-top: 2px; padding: 12px; border-radius: 16px; background: var(--ink); }
+.mini-out-head, .q-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.mini-out .reco-label, .reco-label.lt { color: var(--yellow) !important; margin: 0; }
+.mini-out .button.mini, .q-head .button.mini { background: rgba(255,255,255,.14); }
+.q-head { margin-top: 12px; }
+.q-head:first-child { margin-top: 0; }
+.sharpen { margin-top: 22px; padding-top: 16px; border-top: 1px solid rgba(43,43,43,.12); }
+.sharpen .small-label { margin-bottom: 10px; }
+
+/* Station 4 */
+.sparring-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.sparring-card { position: relative; display: block; margin: 0; min-height: 0; }
+.sparring-card input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.sparring-card:has(input:focus-visible) { outline: 3px solid var(--ink); outline-offset: 3px; }
+.sparring-card .nr { color: var(--challenge-main); font-weight: 950; letter-spacing: .06em; font-size: .8rem; }
+.sparring-card h3 { margin: 10px 0 6px; font-size: 1.25rem; line-height: 1.1; }
+.sparring-card p { font-size: .9rem; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg label { position: relative; margin: 0; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg span { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 40px; padding: .4rem .8rem; border-radius: 999px; border: 1px solid rgba(43,43,43,.2); background: #fff; font-weight: 850; cursor: pointer; }
+.seg input:checked + span { background: var(--challenge-main); color: #fff; border-color: var(--challenge-main); }
+.seg input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
+.ein-row { padding: 12px 14px; border-radius: 16px; background: #fff; border: 1px solid rgba(43,43,43,.12); margin-bottom: 10px; }
+.ein-row > label { margin-bottom: 8px; }
+.yn { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 6px 0; }
+.yn > span { flex: 1 1 200px; font-weight: 750; font-size: .9rem; }
+.yn label { position: relative; margin: 0; }
+.yn input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.yn label span { display: inline-flex; min-width: 54px; justify-content: center; padding: .3rem .7rem; border-radius: 999px; border: 1px solid rgba(43,43,43,.2); font-weight: 850; font-size: .86rem; cursor: pointer; background: #fff; }
+.yn input:checked + span { background: var(--challenge-deep); color: #fff; border-color: var(--challenge-deep); }
+.yn input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
+.ein-out { margin: 6px 0 0; font-weight: 800; color: var(--challenge-deep); font-size: .92rem; }
+.ein-out:empty { display: none; }
+#cmpOut { margin-top: 4px; }
+.exp-box { margin-top: 16px; padding: 12px 16px; border-radius: 16px; background: #fff; border: 1px solid rgba(205,13,208,.22); }
+.exp-box summary { cursor: pointer; font-weight: 900; color: var(--challenge-deep); }
+.exp-box p { margin: 10px 0 0; }
+.module-challenge .after-panel .small-label { color: var(--challenge-deep) !important; }
+
+/* Mitnehmen */
+.end-layout { grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); }
+.readiness-output pre { min-height: 420px; }
+.module-readiness .output-actions { flex-wrap: wrap; justify-content: flex-end; }
+
+/* Fußzeile */
+.site-footer .version-label { max-width: 52ch; }
+
+/* Mittlere Breiten */
+@media (max-width: 1000px) {
+  .rules-strip ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .two-col, .choose-layout, .task-lens-body, .end-layout, .after-grid { grid-template-columns: minmax(0, 1fr); }
+  .sparring-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .progress-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+/* Handy */
+@media (max-width: 720px) {
+  .app { width: calc(100% - 20px); }
+  .module { padding: 18px 14px; border-radius: 24px; }
+  .panel, .form-panel { padding: 14px; }
+  .form-section { padding: 14px 12px; }
+  .rules-strip ul, .rkb, .mode-choice, .sparring-grid { grid-template-columns: minmax(0, 1fr); }
+  .progress-nav { display: flex; flex-wrap: wrap; gap: 6px; border-radius: 22px; position: static; }
+  .progress-nav a { flex: 1 1 auto; padding: 0 .6rem; font-size: .88rem; }
+  h1 { font-size: clamp(2.6rem, 13vw, 3.6rem); }
+  .module-heading h2 { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .outputHeader { flex-wrap: wrap; }
+  .scenario-card { padding: 18px; }
+  .scenario-card h3 { font-size: 1.7rem; }
+  .output-panel pre { min-height: 160px; }
+  .readiness-output pre { min-height: 240px; }
+}
+
+/* Drucken: nur die Karte */
+#print-card { display: none; }
+@media print {
+  body { background: #fff !important; }
+  body > *:not(#print-card) { display: none !important; }
+  #print-card { display: block; font-family: Arial, sans-serif; color: #000; }
+  #print-card h1 { font-size: 20pt; margin: 0; max-width: none; letter-spacing: 0; }
+  #print-card .pc-sub { margin: 2pt 0 10pt; font-size: 10pt; }
+  #print-card h2 { font-size: 13pt; margin: 12pt 0 3pt; letter-spacing: 0; line-height: 1.2; }
+  #print-card p { font-size: 10.5pt; margin: 2pt 0; white-space: pre-wrap; }
+}
+
+/* Badge im Sprint-Kontext (user-choice) nicht als Etikett stylen */
+.user-choice .st-badge, .module-choose .user-choice .st-badge { display: inline-flex !important; text-transform: none; letter-spacing: 0; font-size: .84rem; margin: 8px 0 0; }
+.module-choose .user-choice .st-badge.st-gut, .module-choose .user-choice .st-gut span { color: var(--ok) !important; }
+.module-choose .user-choice .st-badge.st-bedingt, .module-choose .user-choice .st-bedingt span { color: var(--warn) !important; }
+.module-choose .user-choice .st-badge.st-nicht, .module-choose .user-choice .st-nicht span { color: var(--no) !important; }
+.user-choice .st-badge span { display: inline !important; margin: 0 !important; font-size: inherit !important; letter-spacing: 0 !important; text-transform: none !important; }
+.module-choose .reco-label, .module-choose .small-label, .module-choose .module-kicker, .module-choose .user-choice > span { color: #006363 !important; }
+
+.reasons strong { display: inline !important; margin: 0 !important; }
+.reco-summary { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) !important; }
+.mode-opt strong, .mode-opt small { overflow-wrap: break-word; hyphens: auto; }
+
+.toast:not(.show) { visibility: hidden; }
+.req-line strong { display: inline !important; margin: 0 !important; }
+
+/* ===== Fassung 3: schlanker Ablauf ===== */
+.flow-list { list-style: none; margin: auto 0 0; padding: 24px 0 0; display: grid; gap: 10px; }
+.flow-list li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 13px; border-radius: 20px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.14); }
+.rules-strip ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.next-step { display: flex; justify-content: flex-end; margin-top: 22px; }
+.step-n { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; margin-right: 6px; border-radius: 50%; background: var(--ink); color: #fff; font-size: .78rem; font-weight: 950; letter-spacing: 0; vertical-align: 1px; }
+.small-label .step-n { width: 20px; height: 20px; font-size: .7rem; }
+.lab { margin: 0 0 8px; font-weight: 900; }
+.from-card { margin: 4px 0 14px; padding: 14px 16px; border-radius: 18px; background: #fff; border: 1px solid rgba(47,0,191,.18); }
+.from-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.from-card li { font-size: .92rem; line-height: 1.4; font-weight: 650; overflow-wrap: anywhere; }
+.open-tag { display: inline-block; padding: 0 .45rem; border-radius: 999px; background: var(--warn-bg); color: var(--warn); font-weight: 850; font-size: .8rem; }
+.rules-details { margin: 0 0 14px; }
+.rules-details summary { cursor: pointer; font-weight: 900; color: var(--assist-main); padding: 4px 0 10px; }
+.check-line { margin: 0 0 14px; padding: 12px 14px; border-radius: 14px; background: var(--assist-pale); font-weight: 700; line-height: 1.45; }
+.rkb-choice { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+.rkb-opt strong { font-size: 1.05rem; }
+#fbBuilder { margin-top: 16px; }
+.diag { margin-top: 12px; }
+.diag a { color: var(--yellow); }
+.own-task { margin-top: 22px; }
+.own-task > h3 { margin: 6px 0 8px; font-size: clamp(1.6rem, 2.6vw, 2.2rem); outline: none; }
+.own-ref { margin: 0 0 16px; color: rgba(43,43,43,.82); font-weight: 650; }
+.mode-choice.compact { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.req-box { margin: 0 0 12px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1px solid rgba(0,133,133,.25); line-height: 1.45; }
+#ownTri .seg input:checked + span { background: var(--choose-deep); border-color: var(--choose-deep); }
+#ownOut .soft-out, #cmpOut .soft-out { margin: 0 0 12px; }
+.reco-kippen { padding: 14px; border-radius: 16px; background: var(--warn-bg); border: 1px solid rgba(138,109,0,.35); }
+.reco-kippen p { margin: 0; line-height: 1.45; }
+.module-choose .reco-kippen .reco-label { color: var(--warn) !important; }
+.nearer { margin-top: 8px !important; font-weight: 800; color: var(--teal-deep); }
+.reco-auftrag summary { cursor: pointer; font-weight: 900; color: #006363; padding: 4px 0; }
+.reco-auftrag[open] summary { margin-bottom: 8px; }
+.reco-next { flex-wrap: wrap; gap: 8px; }
+.ghost-btn.button { background: rgba(43,43,43,.08); color: var(--ink); }
+.seg.wrap span { min-width: 0; }
+.module-challenge .seg input:checked + span { background: var(--challenge-deep); border-color: var(--challenge-deep); }
+.exp-formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; margin-top: 10px; }
+.exp-btn { text-align: left; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(205,13,208,.25); background: #fff; color: var(--ink); cursor: pointer; font: inherit; }
+.exp-btn strong { display: block; font-weight: 900; }
+.exp-btn span { display: block; margin-top: 3px; color: var(--muted); font-size: .86rem; font-weight: 700; }
+.exp-btn:hover, .exp-btn.active { background: var(--challenge-soft); border-color: var(--challenge-main); }
+#expOut { grid-column: 1 / -1; }
+#expOut .mini-out { margin-top: 6px; }
+.exp-box label { margin-top: 10px; }
+.output-hint.small-gap { margin: 10px 0 0; }
+.end-layout { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+.card-field textarea { min-height: 64px; }
+@media (max-width: 1000px) {
+  .rkb-choice { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .end-layout { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .rules-strip ul, .rkb-choice, .exp-formats { grid-template-columns: minmax(0, 1fr); }
+  .next-step .button { width: 100%; }
+  .reco-next .button { width: 100%; }
+}
+
+.verdict { display: block; font-weight: 800; }
+.module-choose .button.primary:hover, .module-choose .button.secondary:hover { background: #006363 !important; }
+.exp-btn.active span, .exp-btn:hover span { color: #3b3446; }
+
+/* ===== Fassung 4 ===== */
+[hidden] { display: none !important; }
+.sparring-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sparring-card .nr { color: var(--challenge-main); }
+#zuTask { margin-top: 8px; }
+#beitragChips { margin: 4px 0 0; }
+#beitragChips .chip { font-size: .84rem; }
+.rkb-opt small { color: var(--assist-main) !important; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; font-size: .7rem; }
+.branch { margin-top: 14px; }
+.branch-act { display: flex; align-items: flex-end; }
+.sharpen { margin-top: 18px; }
+.save-panel { background: #fff; }
+.save-panel h3 { margin: 6px 0 12px; font-size: clamp(1.5rem, 2.4vw, 2rem); }
+.module-readiness .save-panel .small-label { color: #6b4a00 !important; }
+.status-list { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 8px; }
+.status-list li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; align-items: start; line-height: 1.4; font-weight: 650; }
+.st-sym { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 950; font-size: .8rem; }
+.status-list li.ok .st-sym { background: var(--ok-bg); color: var(--ok); }
+.status-list li.part .st-sym { background: var(--warn-bg); color: var(--warn); }
+.status-list li.open .st-sym { background: var(--mist); color: var(--ink); }
+.save-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.module-readiness .save-actions .button.primary { background: var(--blue) !important; color: #fff !important; }
+.module-readiness .save-actions .button.secondary { background: var(--ink) !important; color: #fff !important; }
+.view-details summary { cursor: pointer; font-weight: 900; padding: 6px 0; }
+.view-details pre { margin-top: 8px; max-height: 420px; overflow: auto; }
+@media (max-width: 1000px) { .sparring-grid.three { grid-template-columns: minmax(0, 1fr); } }
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#karte">Direkt zur Werkstatt</a>
+
+<main class="app" id="top">
+  <header class="hero">
+    <section class="hero-copy" aria-labelledby="page-title">
+      <p class="eyebrow">KI-Kompass am HPI · Deine KI-Werkstatt</p>
+      <h1 id="page-title">Klären. Entscheiden. Ausprobieren.</h1>
+      <p class="lead">Du nimmst eine eigene Aufgabe und gehst mit ihr durch vier Stationen. Am Ende hast du eine begonnene Kompass-Karte und mindestens zwei kleine Versuche hinter dir.</p>
+      <div class="hero-meta" aria-label="Eckdaten">
+        <span>Freiwillig</span>
+        <span>Niemand bewertet, was du einträgst</span>
+        <span>Für Einsteiger und Erfahrene</span>
+      </div>
+      <div class="hero-actions"><a class="button primary" href="#karte">Werkstatt starten</a></div>
+    </section>
+
+    <aside class="outcome-card" aria-labelledby="outcome-h">
+      <h2 id="outcome-h">Eine Aufgabe, vier Stationen.</h2>
+      <p class="outcome-intro">Jede Station ergänzt deine Kompass-Karte. Am Ende sicherst du sie.</p>
+      <ol class="outcome-list flow-list">
+        <li><span class="step-dot set" aria-hidden="true">1</span><div><h3>Klären</h3><p>Aufgabe, Ziel und Nicht-Ziel festhalten.</p></div></li>
+        <li><span class="step-dot choose" aria-hidden="true">2</span><div><h3>Entscheiden</h3><p>Die passende Form der Zusammenarbeit wählen.</p></div></li>
+        <li><span class="step-dot challenge" aria-hidden="true">3</span><div><h3>Ausprobieren</h3><p>Einen begrenzten Beitrag liefern lassen und eine Idee im Sparring schärfen.</p></div></li>
+      </ol>
+    </aside>
+  </header>
+
+  <section class="rules-strip" aria-labelledby="rules-h">
+    <h2 id="rules-h" class="small-label">Bevor du startest</h2>
+    <ul>
+      <li><strong>Nichts wird gespeichert oder gesendet.</strong> Sichere deine Karte am Ende, bevor du das Fenster schließt.</li>
+      <li><strong>Nur zulässige Inhalte.</strong> Keine vertraulichen oder personenbezogenen Daten. Was erlaubt ist, regelt die <span data-link="arbeitsrahmen"></span> (Intranet, HPI-Login); Fragen beantwortet der KI-Beirat (ai-council@hpi.de).</li>
+      <li><strong>Versuche in ChatGPT.</strong> Hier bekommst du Formulierungen zum Kopieren. Wo du in ChatGPT was findest, zeigt die <span data-link="toolhilfe"></span>.</li>
+    </ul>
+  </section>
+
+  <nav class="progress-nav" aria-label="Stationen der Werkstatt">
+    <a href="#karte"><span aria-hidden="true">1</span>Karte</a>
+    <a href="#spiel"><span aria-hidden="true">2</span>Wer bestimmt?</a>
+    <a href="#assistenz"><span aria-hidden="true">3</span>Assistenz</a>
+    <a href="#sparring"><span aria-hidden="true">4</span>Sparring</a>
+    <a href="#sichern"><span aria-hidden="true">✓</span>Sichern</a>
+  </nav>
+
+  <!-- STATION 1 -->
+  <section id="karte" class="module module-set" aria-labelledby="h-karte" tabindex="-1">
+    <div class="module-heading">
+      <div><p class="module-kicker">Station 1 · Klären</p><h2 id="h-karte">Deine Kompass-Karte</h2></div>
+      <p>Wähle eine überschaubare Aufgabe aus deinem Arbeitsalltag. Gut eignen sich Aufgaben mit mehreren Lösungswegen, einem erkennbaren „besser“ und genug Material, das du verwenden darfst. Stichworte genügen, offene Stellen sind erlaubt.</p>
+    </div>
+    <div class="workspace two-col">
+      <form class="panel form-panel" id="cardForm" novalidate>
+        <div id="cardFields"></div>
+      </form>
+      <div class="panel output-panel sticky-output">
+        <div class="outputHeader">
+          <div><p class="small-label">Wächst mit jeder Station</p><h3 id="cardOutH">Deine Kompass-Karte</h3></div>
+          <div class="output-actions"><button class="button mini" type="button" data-copy="cardPre">Kopieren</button></div>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Seite der Karte">
+          <button class="tab active" role="tab" id="tab-front" aria-controls="cardPre" aria-selected="true" data-side="front" type="button">Vorderseite</button>
+          <button class="tab" role="tab" id="tab-back" aria-controls="cardPre" aria-selected="false" data-side="back" type="button" tabindex="-1">Rückseite: Handgriffe</button>
+        </div>
+        <pre id="cardPre" role="tabpanel" aria-labelledby="tab-front" tabindex="0"></pre>
+        <p class="output-hint small-gap">Dieselbe Karte wie im Kurs, hier zum Ausfüllen. Am Ende sicherst du sie.</p>
+      </div>
+    </div>
+    <div class="next-step"><a class="button primary" href="#spiel">Weiter zu Station 2</a></div>
+  </section>
+
+  <!-- STATION 2 -->
+  <section id="spiel" class="module module-choose" aria-labelledby="h-spiel" tabindex="-1">
+    <div class="module-heading">
+      <div><p class="module-kicker">Station 2 · Entscheiden</p><h2 id="h-spiel">Das Entscheidungs&shy;spiel „Wer bestimmt?“</h2></div>
+      <p>Drei kurze Situationen, dann deine eigene Aufgabe. Wähle die Form, mit der du beginnen würdest, und sag, was den Ausschlag gibt. Die Rückmeldung bezieht deine Gründe auf die Situation. Es gibt keine Note und oft mehr als eine gute Antwort.</p>
+    </div>
+    <div class="workspace two-col choose-layout">
+      <section class="panel dilemma-panel" aria-labelledby="scenarioTitle">
+        <div class="dilemma-topline">
+          <p class="small-label" id="scenarioCount"></p>
+          <div class="scenario-controls">
+            <button id="prevScenario" class="button mini ghost-btn" type="button">Zurück</button>
+          </div>
+        </div>
+        <article class="scenario-card">
+          <p class="scen-area" id="scenarioArea"></p>
+          <h3 id="scenarioTitle" tabindex="-1"></h3>
+          <p id="scenarioText"></p>
+          <p class="know-h">Was wir wissen</p>
+          <ul id="scenarioKnow"></ul>
+        </article>
+        <fieldset class="plain-fs">
+          <legend>Mit welcher Form würdest du beginnen?</legend>
+          <div class="mode-choice" id="modeChoice"></div>
+        </fieldset>
+        <fieldset class="plain-fs" id="reasonFs" hidden>
+          <legend>Was gibt für dich den Ausschlag? <span class="optional">mehrere möglich</span></legend>
+          <div class="chip-group" id="reasonChips"></div>
+        </fieldset>
+        <p class="msg" id="msgChoice" role="alert"></p>
+        <button id="showRecommendation" class="button primary wide" type="button">Rückmeldung zeigen</button>
+      </section>
+      <section class="panel recommendation-panel" aria-labelledby="recoH">
+        <p class="small-label" id="recoH">Rückmeldung</p>
+        <div id="recommendationResult" class="empty-state"></div>
+      </section>
+    </div>
+
+    <section class="panel task-lens own-task" aria-labelledby="ownH" id="ownTask">
+      <p class="small-label">Und bei deiner Aufgabe?</p>
+      <h3 id="ownH" tabindex="-1">Deine Form der Zusammenarbeit</h3>
+      <p class="own-ref" id="ownRef"></p>
+      <div class="after-grid">
+        <fieldset class="plain-fs">
+          <legend>Mit welcher Form beginnst du?</legend>
+          <div class="mode-choice compact" id="ownChoice"></div>
+        </fieldset>
+        <div>
+          <div id="ownReq" aria-live="polite"></div>
+          <div id="ownTri" hidden>
+            <fieldset class="plain-fs">
+              <legend id="ownTriL"></legend>
+              <div class="seg" id="segOwn"></div>
+            </fieldset>
+            <div id="ownOut" aria-live="polite"></div>
+            <button class="button secondary" type="button" id="ownAdd">In Feld 2 der Karte übernehmen</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="next-step"><a class="button primary" href="#assistenz">Weiter zu Station 3</a></div>
+  </section>
+
+  <!-- STATION 3 -->
+  <section id="assistenz" class="module module-assist" aria-labelledby="h-assistenz" tabindex="-1">
+    <div class="module-heading">
+      <div><p class="module-kicker">Station 3 · Ausprobieren</p><h2 id="h-assistenz">KI als Assistenz</h2></div>
+      <p>Bei der Zuarbeit steuerst du selbst und holst dir nur einen begrenzten Beitrag, etwa eine Gegenüberstellung, einen Formulierungsvorschlag oder eine Auswertung. Das probierst du jetzt mit deiner Aufgabe direkt in ChatGPT aus. Den Einstieg zeigt die Toolhilfe in Lektion 5.3.</p>
+    </div>
+    <div class="instruction-strip">
+      <article><strong>Beitrag festlegen</strong><span>Was genau soll die KI liefern? Ein überschaubarer Teil, nicht die ganze Aufgabe.</span></article>
+      <article><strong>Auftrag kopieren</strong><span>In einen neuen Chat bei ChatGPT, dein Material im Anhang.</span></article>
+      <article><strong>Prüfen und nachsteuern</strong><span>Antwort einordnen, gezielt reagieren, Karte schärfen.</span></article>
+    </div>
+    <div class="workspace two-col">
+      <form class="panel form-panel" id="assistForm" novalidate>
+        <label for="zuTask"><span class="step-n">1</span> Welchen Beitrag brauchst du von der KI?</label>
+        <p class="field-help small" id="zuHelp">Schreib es in eigenen Worten oder tippe ein Beispiel an und passe es an.</p>
+        <div class="chip-group add-chips" id="beitragChips" role="group" aria-label="Beispiele für einen Beitrag"></div>
+        <textarea id="zuTask" rows="3" aria-describedby="zuHelp" placeholder="z. B. Stelle die drei Angebote nebeneinander: Preise, Leistungen, Fristen."></textarea>
+        <div class="from-card">
+          <p class="lab"><span class="step-n">2</span> Aus deiner Karte</p>
+          <ul id="fromCard"></ul>
+        </div>
+        <details class="rules-details">
+          <summary>Arbeitsregeln für die KI (voreingestellt)</summary>
+          <div class="rule-box" id="regeln"></div>
+        </details>
+        <p class="msg" id="msgAssist" role="alert"></p>
+        <button class="button primary wide" type="submit">Auftrag erstellen</button>
+      </form>
+      <section class="panel output-panel sticky-output" aria-labelledby="assistOutH">
+        <div class="outputHeader">
+          <div><p class="small-label">Zum Kopieren</p><h3 id="assistOutH">Dein Auftrag</h3></div>
+          <div class="output-actions"><button class="button mini" type="button" data-copy="assistPre">Kopieren</button></div>
+        </div>
+        <p class="output-hint">Füge den Auftrag in einen neuen Chat bei ChatGPT ein und hänge dein Material an. Nur, was du verwenden darfst.</p>
+        <pre id="assistPre" tabindex="0">Beschreibe links deinen Beitrag und erstelle den Auftrag.</pre>
+      </section>
+    </div>
+
+    <section class="panel after-panel" aria-labelledby="afterH" id="afterPanel" hidden>
+      <p class="small-label"><span class="step-n">3</span> Antwort da?</p>
+      <h3 id="afterH" tabindex="-1">Prüfen und nachsteuern</h3>
+      <p class="check-line">Prüf zuerst, bevor du urteilst: Öffne zwei, drei wichtige Belege selbst und achte darauf, ob etwas ergänzt wurde, das nicht in deinem Material steht.</p>
+      <fieldset class="plain-fs">
+        <legend>Wie passt die Antwort zu deinem Auftrag?</legend>
+        <div class="rkb-choice" id="ausgang"></div>
+      </fieldset>
+      <div id="diagOut" aria-live="polite"></div>
+      <div id="fbBuilder" class="branch" hidden>
+        <div class="after-grid">
+          <div>
+            <label>Stelle: Wo genau?<input id="fbStelle" autocomplete="off" placeholder="z. B. Im zweiten Abschnitt"></label>
+            <label>Kriterium: Was stimmt nicht?<input id="fbKrit" autocomplete="off" placeholder="z. B. sind Fakten und Vermutungen vermischt. Trenne beides"></label>
+            <label>Grenze: Was bleibt?<input id="fbGrenze" autocomplete="off" placeholder="z. B. Behalte die übrige Struktur bei"></label>
+          </div>
+          <div class="mini-out">
+            <div class="mini-out-head"><span class="reco-label">Deine Rückmeldung</span><button class="button mini" type="button" data-copy="fbPre">Kopieren</button></div>
+            <pre id="fbPre" tabindex="0" aria-live="polite">Fülle die drei Teile aus.</pre>
+          </div>
+        </div>
+      </div>
+      <div id="kursBranch" class="branch" hidden>
+        <div class="after-grid">
+          <div>
+            <label>Feld 1: Wofür wird das Ergebnis gebraucht, und was soll besser werden?<textarea data-card="aufgabe" rows="2"></textarea></label>
+            <label>Nicht-Ziel<textarea data-card="nichtziel" rows="2"></textarea></label>
+          </div>
+          <div class="branch-act"><button class="button primary" type="button" id="rebuild">Auftrag neu erstellen</button></div>
+        </div>
+      </div>
+      <div id="bootBranch" class="branch" hidden>
+        <div class="mini-out">
+          <div class="mini-out-head"><span class="reco-label">Zum Kopieren</span><button class="button mini" type="button" data-copy="bootPre">Kopieren</button></div>
+          <pre id="bootPre" tabindex="0"></pre>
+        </div>
+      </div>
+      <div class="sharpen" id="sharpen" hidden>
+        <label>Für deine Karte (Feld 4): Woran erkennst du ein brauchbares Ergebnis, und was ist dein nächster Versuch?
+          <textarea data-card="qualitaet" rows="3"></textarea></label>
+      </div>
+    </section>
+    <div class="next-step"><a class="button primary" href="#sparring">Weiter zu Station 4</a></div>
+  </section>
+
+  <!-- STATION 4: Inhalte unverändert aus dem Human-AI Readiness Sprint -->
+  <section id="sparring" class="module module-challenge" aria-labelledby="h-sparring" tabindex="-1">
+    <div class="module-heading">
+      <div><p class="module-kicker">Station 4 · Ausprobieren</p><h2 id="h-sparring">KI als Sparring</h2></div>
+      <p>Nutze KI als konstruktiven Sparringspartner. Dafür kannst du bei deiner Aufgabe aus den Stationen 1 bis 3 bleiben oder etwas Neues nehmen: eine Idee, eine Annahme oder eine Frage, die dich gerade beschäftigt. Anders als in Station 3 geht es hier nicht um einen Beitrag zum Ergebnis, sondern darum, deine eigene Sicht zu schärfen. Der eigentliche Wert entsteht in Runde 2 und 3: prüfen, reagieren, nachschärfen.</p>
+    </div>
+    <div class="instruction-strip">
+      <article><strong>Format wählen</strong><span>Robustheits-Check, Schichten-Analyse oder Experten-Diskussion.</span></article>
+      <article><strong>Echte Frage nutzen</strong><span>Nicht üben um des Übens willen: nimm eine reale Idee oder Annahme.</span></article>
+      <article><strong>Iterieren</strong><span>Die erste Antwort ist Startpunkt. Wert entsteht durch Reaktion und Nachschärfung.</span></article>
+    </div>
+    <div class="sparring-grid three" id="sparringGrid" role="radiogroup" aria-label="Sparring-Format"></div>
+    <div class="workspace two-col">
+      <form id="sparringForm" class="panel form-panel" novalidate>
+        <div class="section-note challenge-note"><strong id="sparringName"></strong><span id="sparringUse"></span></div>
+        <label><span id="sparringMainLabel"></span><textarea name="main" id="spMain" rows="4"></textarea></label>
+        <label><span id="sparringContextLabel"></span><textarea name="context" id="spCtx" rows="4"></textarea></label>
+        <button class="button primary wide" type="submit">Sparring-Prompt generieren</button>
+      </form>
+      <section class="panel output-panel sticky-output" aria-labelledby="spOutH">
+        <div class="outputHeader">
+          <div><p class="small-label">Zum Kopieren</p><h3 id="spOutH">Sparring-Prompt</h3></div>
+          <div class="output-actions"><button class="button mini" type="button" data-copy="sparringResult">Kopieren</button></div>
+        </div>
+        <pre id="sparringResult" tabindex="0">Wähle ein Format, beschreibe deine Aufgabe und generiere einen Prompt.</pre>
+      </section>
+    </div>
+    <div class="next-step"><a class="button primary" href="#sichern">Weiter zum Abschluss</a></div>
+  </section>
+
+  <!-- ABSCHLUSS -->
+  <section id="sichern" class="module module-readiness" aria-labelledby="h-sichern" tabindex="-1">
+    <div class="module-heading">
+      <div><p class="module-kicker">Abschluss</p><h2 id="h-sichern">Deine Karte sichern</h2></div>
+      <p>Was aus der Werkstatt mitgeht, ist deine Kompass-Karte aus Station 1. Für das Grundlagen-Labor reichen zwei oder drei mögliche Aufgaben, kurze Einträge zu Aufgabe und Ziel genügen. Notiere nur, was du zulässig weitergeben darfst.</p>
+    </div>
+    <div class="workspace two-col end-layout">
+      <div class="panel form-panel">
+        <p class="lab">Mögliche Aufgaben fürs Grundlagen-Labor</p>
+        <p class="field-help small" id="laborFirst"></p>
+        <label>Aufgabe 2<input id="labor2" autocomplete="off" placeholder="kurz: Aufgabe und Ziel"></label>
+        <label>Aufgabe 3 <span class="optional">optional</span><input id="labor3" autocomplete="off" placeholder="kurz: Aufgabe und Ziel"></label>
+        <label>Notizen <span class="optional">optional</span><textarea id="notes" rows="3" placeholder="z. B. Was ich im Labor fragen möchte"></textarea></label>
+        <div id="warn" aria-live="polite"></div>
+      </div>
+      <section class="panel save-panel" aria-labelledby="saveH">
+        <p class="small-label">Stand deiner Kompass-Karte</p>
+        <h3 id="saveH">Fertig für heute?</h3>
+        <ul class="status-list" id="statusList"></ul>
+        <div class="save-actions">
+          <button class="button primary" type="button" data-copy="endPre">Kopieren</button>
+          <button class="button secondary" type="button" id="dlBtn">Herunterladen</button>
+          <button class="button ghost-btn" type="button" id="printBtn">Drucken</button>
+        </div>
+        <p class="field-help small">Die Datei enthält die Karte mit Rückseite und im Anhang deine Labor-Aufgaben und Formulierungen. Funktioniert Kopieren oder Herunterladen nicht, öffne „Ansehen“ und kopiere den Text von Hand.</p>
+        <details class="view-details"><summary>Ansehen</summary><pre id="endPre" tabindex="0"></pre></details>
+      </section>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div>
+      <p class="small-label">KI-Kompass am HPI</p>
+      <strong>Deine KI-Werkstatt</strong>
+      <span>Konzept und Umsetzung: Samuel Tschepe</span>
+      <span class="version-label">Alle Situationen und Beispiele sind erfunden. Nichts wird gespeichert oder gesendet.</span>
+    </div>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB8QAAAIrCAYAAACZECOWAAAACXBIWXMAAC4jAAAuIwF4pT92AAAgAElEQVR4nOzd7XUbR5o24Bt7/J/eCMSNQNoI1BOBtBGIE4G5EZiOwJoIDEcwdATTimCoCBaK4JUiwPsDBQmW9UGCDVRX9XWdw+MZWwIekM3+qLvqqdV2uw0AAAAAAAAA9OY/ahcAAAAAAAAAAKcgEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALokEAcAAAAAAACgSwJxAAAAAAAAALr0Q+0CYCmGVZ4l+bF2HTCh9+M2d7WLAAAAAAAA+JrVdrutXQN0b1jldZKfatcBJ/CPcZvr2kUAAAAA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gJIE4gAAAAAAAACUJBAHAAAAAAAAoCSBOAAAAAAAAAAlCcQBAAAAAAAAKEkgDgAAAAAAAEBJAnEAAAAAAAAAShKIAwAAAAAAAFCSQBwAAAAAAACAkgTiAAAAAAAAAJQkEAcAAAAAAACgJIE4AAAAAAAAACUJxAEAAAAAAAAoSSAOAAAAAAAAQEkCcQAAAAAAAABKEogDAAAAAAAAUJJAHAAAAAAAAICSBOIAAAAAAAAAlCQQBwAAAAAAAKAkgTgAAAAAAAAAJQnEAQAAAAAAAChJIA4AAAAAAABASQJxAAAAAAAAAEoSiAMAAAAAAABQkkAcAAAAAAAAgJIE4gAAAAAAAACUJBAHAAAAAAAAoCSBOAAAAAAAAAAlCcQBAAAAAAAAKEkgDgAAAAAAAEBJAnEAAAAAAAAAShKIAwAAAAAAAFCSQBwAAAAAAACAkgTiAAAAAAAAAJQkEAcAAAAAAACgJIE4AAAAAAAAACUJxAEAAAAAAAAoSSAOAAAAAAAAQEkCcQAAAAAAAABKEogDAAAAAAAAUJJAHAAAAAAAAICSBOIAAAAAAAAAlCQQBwAAAAAAAKAkgTgAAAAAAAAAJQnEAQAAAAAAAChJIA4AAAAAAABASQJxAAAAAAAAAEoSiAMAAAAAAABQkkAcAAAAAAAAgJIE4gAAAAAAAACUJBAHAAAAAAAAoCSBOAAAAAAAAAAlCcQBAAAAAAAAKEkgDgAAAAAAAEBJAnEAAAAAAAAAShKIAwAAAAAAAFCSQBwAAAAAAACAkgTiAAAAAAAAAJQkEAcAAAAAAACgJIE4AAAAAAAAACUJxAEAAAAAAAAoSSAOAAAAAAAAQEkCcQAAAAAAAABKEogDAAAAAAAAUJJAHAAAAAAAAICSBOIAAAAAAAAAlCQQBwAAAAAAAKAkgTgAAAAAAAAAJQnEAQAAAAAAAChJIA4AAAAAAABASQJxAAAAAAAAAEoSiAMAAAAAAABQkkAcAAAAAAAAgJL+HzdmsR5WupJdAAAAAElFTkSuQmCC" alt="HPI d-school">
+  </footer>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="print-card" aria-hidden="true"></div>
+<script>
+/* Deine KI-Werkstatt · Inhalte (Fassung 4). Alle Situationen und Beispiele sind erfunden.
+   Fakten f: [Wert, Satz]; Wert true / false / null (steht nicht fest). core: gehört zu den drei Situationen des Grundpfads.
+   Die Sparring-Formate stehen unverändert aus dem Human-AI Readiness Sprint in app.js. */
+window.WS = {
+  "FORMS": [
+    {
+      "id": "eigen",
+      "kurz": "Eigenarbeit",
+      "name": "Selbst gestalten",
+      "frage": "Was wollen wir eigentlich?",
+      "vor": "Braucht Zeit.",
+      "req": [
+        "zeit"
+      ]
+    },
+    {
+      "id": "zu",
+      "kurz": "Zuarbeit",
+      "name": "Gezielt unterstützen lassen",
+      "frage": "Welchen Baustein brauche ich, während ich selbst steuere?",
+      "vor": "Du kannst Ergebnisse schnell beurteilen.",
+      "req": [
+        "quick"
+      ]
+    },
+    {
+      "id": "dialog",
+      "kurz": "Dialog",
+      "name": "Im Dialog entwickeln",
+      "frage": "Wie wird das besser?",
+      "vor": "Braucht Raum für mehrere Runden.",
+      "req": [
+        "zeit"
+      ]
+    },
+    {
+      "id": "aus",
+      "kurz": "Ausarbeitung",
+      "name": "Ausarbeiten lassen und prüfen",
+      "frage": "Wie schaffen wir mehr davon, ohne dass die Qualität leidet?",
+      "vor": "Braucht klare Kriterien und eine eingeplante Prüfung durch jemanden, der beurteilen und widersprechen darf.",
+      "req": [
+        "crit"
+      ]
+    },
+    {
+      "id": "leit",
+      "kurz": "Leitplanken",
+      "name": "In Leitplanken laufen lassen",
+      "frage": "Wie läuft das verlässlich mit, ohne dass wir jede Handlung einzeln entscheiden?",
+      "vor": "Fehler fallen auf und sind zu verkraften.",
+      "req": [
+        "safe"
+      ]
+    }
+  ],
+  "NEARER": {
+    "leit": "aus",
+    "aus": "dialog",
+    "zu": "dialog",
+    "dialog": "eigen"
+  },
+  "STATUS": {
+    "gut": "Passt gut",
+    "bedingt": "Passt unter Bedingungen",
+    "nicht": "Passt hier eher nicht"
+  },
+  "REASONS": [
+    {
+      "id": "own",
+      "t": "Es soll bei mir bleiben: Lernen, Urteil oder eigene Worte",
+      "pro": [
+        "eigen",
+        "dialog"
+      ],
+      "contra": [
+        "aus",
+        "leit"
+      ]
+    },
+    {
+      "id": "stakes",
+      "t": "Fehler hätten spürbare Folgen",
+      "pro": [
+        "eigen",
+        "zu",
+        "aus"
+      ],
+      "contra": [
+        "leit"
+      ]
+    },
+    {
+      "id": "safe",
+      "t": "Fehler fielen auf und wären zu verkraften",
+      "pro": [
+        "leit"
+      ],
+      "contra": []
+    },
+    {
+      "id": "crit",
+      "t": "Klare Kriterien, und vor der Verwendung prüft jemand",
+      "pro": [
+        "aus"
+      ],
+      "contra": [
+        "dialog"
+      ]
+    },
+    {
+      "id": "quick",
+      "t": "Ich kann Ergebnisse schnell beurteilen",
+      "pro": [
+        "zu"
+      ],
+      "contra": []
+    },
+    {
+      "id": "zeit",
+      "t": "Es ist Zeit da, auch für mehrere Runden",
+      "pro": [
+        "eigen",
+        "dialog"
+      ],
+      "contra": []
+    }
+  ],
+  "SCEN": [
+    {
+      "id": "s1",
+      "core": true,
+      "bereich": "Verwaltung",
+      "title": "Das Wochenprotokoll",
+      "text": "Jede Woche gibt es eine Sitzung, und du schreibst das Protokoll. Aus deinen Stichworten soll ein Protokoll werden, auf das sich später alle bei Absprachen und Fristen verlassen.",
+      "know": [
+        "Was ins Protokoll gehört, ist festgelegt: Beschlüsse, Verantwortliche, Fristen.",
+        "Eine Kollegin liest vor dem Versand gegen und darf korrigieren.",
+        "Ein falsch notierter Beschluss fiele womöglich erst Wochen später auf.",
+        "Das Protokoll fällt jede Woche an."
+      ],
+      "good": [
+        "aus"
+      ],
+      "human": "Die Freigabe vor dem Versand bleibt bei dir.",
+      "fb": {
+        "eigen": [
+          "bedingt",
+          "Das geht und ist sicher, kostet aber jede Woche Zeit. Bei festen Kriterien hängt die Qualität nicht an deinen eigenen Worten."
+        ],
+        "zu": [
+          "bedingt",
+          "Möglich, etwa für eine Gliederung oder einzelne Sätze. Bei einem wöchentlichen Protokoll steuerst du dann jede Woche jeden Baustein selbst."
+        ],
+        "dialog": [
+          "nicht",
+          "Was ein gutes Protokoll ist, steht fest. Es gibt wenig zu entwickeln; mehrere Gesprächsrunden wären Aufwand ohne Gewinn."
+        ],
+        "aus": [
+          "gut",
+          "Die Kriterien sind klar, und die Prüfung vor dem Versand ist eingeplant, durch jemanden, der beurteilen und widersprechen darf. Genau das braucht die Ausarbeitung."
+        ],
+        "leit": [
+          "nicht",
+          "Fehler fielen spät auf und hätten Folgen für Absprachen. Dass etwas jede Woche wiederkehrt, macht es noch nicht zu Leitplanken."
+        ]
+      },
+      "kippen": "Wer in Sekunden freigibt, was Minuten Prüfung bräuchte, prüft nicht mehr. Dann wird aus dem Gegenlesen ein Durchwinken.",
+      "auftrag": "Erstelle aus den folgenden Stichworten ein Protokoll mit drei Teilen: Beschlüsse, Verantwortliche, Fristen. Übernimm nur, was in den Stichworten steht. Markiere jede Stelle, an der ein Beschluss oder eine Frist nicht eindeutig hervorgeht, mit [unklar].\n\n[Stichworte einfügen]",
+      "f": {
+        "own": [
+          false,
+          "Auf Lernen oder eigene Worte kommt es beim Protokoll nicht an."
+        ],
+        "stakes": [
+          true,
+          "Ein falscher Beschluss hätte Folgen für spätere Absprachen."
+        ],
+        "safe": [
+          false,
+          "Ein Fehler fiele womöglich erst Wochen später auf."
+        ],
+        "crit": [
+          true,
+          "Was ins Protokoll gehört, ist festgelegt, und eine Kollegin liest vor dem Versand gegen."
+        ],
+        "quick": [
+          true,
+          "Ein Protokoll lässt sich in wenigen Minuten gegenlesen."
+        ],
+        "zeit": [
+          null,
+          "Ob jede Woche Zeit für ein eigenes Protokoll oder mehrere Runden bleibt, steht nicht fest."
+        ]
+      }
+    },
+    {
+      "id": "s4",
+      "core": true,
+      "bereich": "Lehre und Weiterbildung",
+      "title": "Eine neue Methode lernen",
+      "text": "Ab dem nächsten Semester sollst du Workshops mit einer Methode anleiten, die du bisher nur vom Zuschauen kennst. Du willst sie dir mit KI erarbeiten.",
+      "know": [
+        "Am Ende sollst du die Methode selbst erklären und anleiten können.",
+        "Weil sie neu für dich ist, kannst du Antworten noch schlecht beurteilen.",
+        "Du hast einige Wochen Zeit.",
+        "Eine erfahrene Kollegin würde einmal mit dir üben."
+      ],
+      "good": [
+        "eigen",
+        "dialog"
+      ],
+      "human": "Das Verstehen und Üben, also genau das, was du lernen willst.",
+      "fb": {
+        "eigen": [
+          "gut",
+          "Lesen, ausprobieren, selbst zusammenfassen: So entsteht eigene Urteilskraft. Das braucht Zeit, und die hast du."
+        ],
+        "zu": [
+          "bedingt",
+          "Erklärungen oder Beispiele können helfen. Weil du Antworten noch schlecht beurteilen kannst, prüfe sie an einer zweiten Quelle oder mit der Kollegin."
+        ],
+        "dialog": [
+          "gut",
+          "Lass dich befragen, erkläre selbst und hol dir Rückmeldung. So fordert dich der Dialog, statt dir das Denken abzunehmen."
+        ],
+        "aus": [
+          "nicht",
+          "Ein fertig ausgearbeiteter Leitfaden nimmt dir genau den Teil ab, den du lernen willst: ein Zielkonflikt."
+        ],
+        "leit": [
+          "nicht",
+          "Beim Lernen läuft nichts nebenher. Hier zählt, was bei dir bleibt."
+        ]
+      },
+      "kippen": "Wenn du fertige Antworten übernimmst, die sich nach Verstehen anfühlen, und erst im Workshop merkst, was fehlt.",
+      "auftrag": "Hilf mir, die Methode [Name der Methode] so zu lernen, dass ich sie selbst anleiten kann. Gib mir nicht sofort die fertige Lösung. Stelle mir zuerst Fragen zu meinem Vorwissen, lass mich einen eigenen Ablauf entwerfen und gib mir danach Rückmeldung in drei Stufen: was fehlt, was ich verbessern kann und was mein nächster Übungsschritt ist.",
+      "f": {
+        "own": [
+          true,
+          "Am Ende sollst du die Methode selbst anleiten können."
+        ],
+        "stakes": [
+          false,
+          "Beim Üben hat ein Fehler keine großen Folgen."
+        ],
+        "safe": [
+          false,
+          "Lücken fallen dir womöglich erst im Workshop auf."
+        ],
+        "crit": [
+          false,
+          "Woran du merkst, dass du es kannst, ist noch offen."
+        ],
+        "quick": [
+          null,
+          "Weil die Methode neu ist, kannst du Antworten nur mit einer zweiten Quelle gut beurteilen."
+        ],
+        "zeit": [
+          true,
+          "Du hast einige Wochen Zeit und kannst in mehreren Runden üben."
+        ]
+      }
+    },
+    {
+      "id": "s2",
+      "core": true,
+      "bereich": "Verwaltung",
+      "title": "Raumanfragen vorsortieren",
+      "text": "Über ein Formular kommen täglich Raumanfragen herein. Sie sollen grob vorsortiert werden: dringend, Standard oder unklar. Bearbeitet werden sie danach von Menschen.",
+      "know": [
+        "Die Kategorien und die Regeln dafür sind festgelegt.",
+        "Eine falsche Einordnung fällt spätestens bei der Bearbeitung auf und kostet höchstens eine Rückfrage.",
+        "Es sind viele Anfragen, jeden Tag.",
+        "Niemand soll jede Einordnung vorher einzeln prüfen."
+      ],
+      "good": [
+        "leit"
+      ],
+      "human": "Festlegen, was als dringend gilt, und regelmäßig nachschauen, was durchgeht.",
+      "fb": {
+        "eigen": [
+          "nicht",
+          "Jede Anfrage selbst einzuordnen, würde funktionieren, bindet aber täglich Zeit für eine Aufgabe, bei der Fehler auffallen und zu verkraften sind."
+        ],
+        "zu": [
+          "bedingt",
+          "Möglich, aber dann entscheidest du jede Anfrage einzeln. Bei dieser Menge ist das kaum eine Entlastung."
+        ],
+        "dialog": [
+          "nicht",
+          "Die Regeln stehen fest. Es gibt nichts gemeinsam zu entwickeln."
+        ],
+        "aus": [
+          "nicht",
+          "Ausarbeitung bräuchte eine Prüfung jeder Einordnung vor der Bearbeitung. Die ist hier nicht vorgesehen und bei dieser Menge kaum leistbar."
+        ],
+        "leit": [
+          "gut",
+          "Fehler fallen bei der Bearbeitung auf und kosten höchstens eine Rückfrage: Die doppelte Probe ist bestanden. Dazu gehören festgelegte Grenzen, ein Meldeweg für Unklares und eine regelmäßige Stichprobe."
+        ]
+      },
+      "kippen": "Wer Fehler erst bemerkt, wenn sich jemand beschwert, arbeitet nicht in Leitplanken, sondern ohne. Oder es wird unbemerkt mehr daraus, etwa Antworten an die Anfragenden, ohne dass das jemand beschlossen hat.",
+      "auftrag": "Ordne jede der folgenden Anfragen genau einer Kategorie zu: dringend, Standard oder unklar. Regeln: [Regeln einfügen]. Wenn eine Anfrage keiner Regel eindeutig entspricht, ordne sie als unklar ein und nenne den Grund in einem Satz. Beantworte keine Anfrage. Beginne mit zehn Beispielen, die ich prüfe, bevor es regelmäßig läuft.\n\n[Anfragen ohne Namen einfügen]",
+      "f": {
+        "own": [
+          false,
+          "Auf Lernen oder eigene Worte kommt es hier nicht an."
+        ],
+        "stakes": [
+          false,
+          "Eine falsche Einordnung kostet höchstens eine Rückfrage."
+        ],
+        "safe": [
+          true,
+          "Eine falsche Einordnung fällt bei der Bearbeitung auf und ist zu verkraften."
+        ],
+        "crit": [
+          false,
+          "Die Kategorien sind festgelegt, aber niemand soll jede Einordnung vorher prüfen."
+        ],
+        "quick": [
+          true,
+          "Ob eine Einordnung stimmt, siehst du auf einen Blick."
+        ],
+        "zeit": [
+          false,
+          "Für jede Anfrage einzeln ist keine Zeit vorgesehen."
+        ]
+      }
+    },
+    {
+      "id": "s6",
+      "core": false,
+      "bereich": "Forschung und Gremien",
+      "title": "Die lückenhafte Tabelle",
+      "text": "Für eine Gremiensitzung soll aus einer Tabelle mit Teilnahmezahlen der letzten Jahre eine Aussage abgeleitet werden. Einige Felder fehlen, und die Sitzung ist übermorgen.",
+      "know": [
+        "Du kennst die Tabelle und kannst Ergebnisse schnell gegenprüfen.",
+        "Einige Felder fehlen, die Datenqualität ist unklar.",
+        "Das Gremium wird sich auf die Aussage stützen.",
+        "Bis zur Sitzung bleibt wenig Zeit."
+      ],
+      "good": [
+        "zu"
+      ],
+      "human": "Die Deutung der Zahlen und was du dem Gremium als gesichert vorlegst.",
+      "fb": {
+        "eigen": [
+          "nicht",
+          "Selbst auszuwerten wäre sicher, aber bis übermorgen bleibt dafür kaum Zeit."
+        ],
+        "zu": [
+          "gut",
+          "Das System kann Lücken zeigen, Zahlen gegenüberstellen und Fragen an die Daten stellen. Du kennst die Tabelle und prüfst jeden Baustein selbst. Genau das braucht die Zuarbeit."
+        ],
+        "dialog": [
+          "nicht",
+          "Gemeinsam Fragen an die Daten zu entwickeln, braucht mehrere Runden. Dafür bleibt bis übermorgen kaum Raum."
+        ],
+        "aus": [
+          "nicht",
+          "Bei unklarer Datenqualität fehlen klare Kriterien. Eine ausgearbeitete Aussage mit Zahlen wirkt sicherer, als sie ist."
+        ],
+        "leit": [
+          "nicht",
+          "Fehler fielen erst im Gremium oder gar nicht auf, und das Gremium stützt sich darauf."
+        ]
+      },
+      "kippen": "Wenn Zahlen in sicherer Sprache belastbarer wirken, als die Daten es hergeben.",
+      "auftrag": "Prüfe diese Tabelle zuerst auf Lücken, Ausreißer und mögliche Verzerrungen. Ziehe noch keine Schlussfolgerung. Zeige mir: Was lässt sich sicher sagen, was ist unsicher, und welche Aussage wäre mit diesen Daten vertretbar?\n\n[Tabelle ohne personenbezogene Daten einfügen]",
+      "f": {
+        "own": [
+          false,
+          "Lernen oder eigene Worte stehen hier nicht im Vordergrund. Die Deutung bleibt trotzdem bei dir."
+        ],
+        "stakes": [
+          true,
+          "Das Gremium wird sich auf die Aussage stützen."
+        ],
+        "safe": [
+          false,
+          "Ein Fehler fiele womöglich erst im Gremium auf."
+        ],
+        "crit": [
+          false,
+          "Wegen der Lücken ist unklar, was eine belastbare Aussage ist."
+        ],
+        "quick": [
+          true,
+          "Du kennst die Tabelle und kannst schnell gegenprüfen."
+        ],
+        "zeit": [
+          false,
+          "Bis übermorgen bleibt kaum Zeit, erst recht nicht für mehrere Runden."
+        ]
+      }
+    },
+    {
+      "id": "s3",
+      "core": false,
+      "bereich": "Lehre",
+      "title": "Kommentare aus der Lehrevaluation",
+      "text": "Zu einer Lehrveranstaltung liegen über hundert Freitextkommentare aus der Evaluation vor. Daraus soll ein Überblick für die Planung des nächsten Semesters entstehen.",
+      "know": [
+        "Welche Themen wichtig sind und wie man sie gewichtet, ist noch offen.",
+        "Die Planung wird sich auf den Überblick stützen.",
+        "Bis dahin bleiben zwei Wochen, Zeit für mehrere Runden ist da.",
+        "In einzelnen Kommentaren stehen Namen."
+      ],
+      "good": [
+        "dialog",
+        "eigen"
+      ],
+      "human": "Was wichtig ist und was daraus für die Planung folgt.",
+      "fb": {
+        "eigen": [
+          "gut",
+          "Selbst lesen und ordnen hält dich nah an den Stimmen der Studierenden. Das braucht Zeit, und die ist da."
+        ],
+        "zu": [
+          "bedingt",
+          "Einzelne Bausteine helfen, etwa eine erste Gruppierung. Solange offen ist, was wichtig ist, kannst du sie aber nur schwer schnell beurteilen."
+        ],
+        "dialog": [
+          "gut",
+          "Im Gespräch kannst du Lesarten vergleichen, nach Gegenbeispielen fragen und Kriterien entwickeln, ohne dass das System festlegt, was wichtig ist."
+        ],
+        "aus": [
+          "nicht",
+          "Für eine Ausarbeitung fehlen klare Kriterien. Ein glatter Überblick würde schnell wie die Wahrheit wirken. Sie kann folgen, wenn die Kriterien stehen."
+        ],
+        "leit": [
+          "nicht",
+          "Ein verzerrter Überblick fiele kaum auf, und die Planung stützt sich darauf. Hier soll nichts nebenher mitlaufen."
+        ]
+      },
+      "kippen": "Wer nach der ersten Antwort „sieht gut aus“ sagt, ist aus dem Dialog in die Zuarbeit gerutscht. Eine flüssige Zusammenfassung lässt einzelne, abweichende Stimmen leicht verschwinden.",
+      "auftrag": "Hier sind Freitextkommentare aus einer Lehrevaluation, ohne Namen. Schlage drei unterschiedliche Möglichkeiten vor, sie zu gruppieren, nicht die eine richtige. Nenne zu jeder Gruppe zwei typische Kommentare. Markiere unsichere Zuordnungen und zeige, welche Stimmen in keiner Gruppe auftauchen.\n\n[Kommentare ohne Namen einfügen]",
+      "f": {
+        "own": [
+          true,
+          "Es kommt auf deine eigene Gewichtung der Kommentare an."
+        ],
+        "stakes": [
+          true,
+          "Die Planung des nächsten Semesters stützt sich auf den Überblick."
+        ],
+        "safe": [
+          false,
+          "Ein verzerrter Überblick fiele kaum auf."
+        ],
+        "crit": [
+          false,
+          "Was wichtig ist, ist noch offen."
+        ],
+        "quick": [
+          null,
+          "Ob du Ergebnisse schnell beurteilen kannst, hängt davon ab, wie klar die Kriterien schon sind."
+        ],
+        "zeit": [
+          true,
+          "Bis zur Planung bleiben zwei Wochen, auch für mehrere Runden."
+        ]
+      }
+    },
+    {
+      "id": "s5",
+      "core": false,
+      "bereich": "Zusammenarbeit im Bereich",
+      "title": "Das Gespräch mit der skeptischen Leitung",
+      "text": "Du willst deiner Bereichsleitung vorschlagen, einen eingespielten Ablauf zu ändern. Du rechnest mit Skepsis und möchtest dich auf das Gespräch vorbereiten.",
+      "know": [
+        "Im Gespräch kommt es auf deine Argumente und deine Haltung an.",
+        "Die möglichen Einwände kennst du nur zum Teil.",
+        "Bis zum Termin bleibt eine Woche.",
+        "Das Gespräch führst du selbst."
+      ],
+      "good": [
+        "dialog"
+      ],
+      "human": "Das echte Gespräch, deine Argumente und deine Haltung.",
+      "fb": {
+        "eigen": [
+          "bedingt",
+          "Deine Argumente selbst zu sortieren, ist ein guter Anfang. Einwände, die du nicht kennst, findest du allein aber schwer."
+        ],
+        "zu": [
+          "bedingt",
+          "Eine Liste möglicher Einwände ist ein nützlicher Baustein. Wie gut sie ist, merkst du aber erst, wenn du darauf antwortest."
+        ],
+        "dialog": [
+          "gut",
+          "Das System kann die skeptische Leitung spielen, nachfragen und Einwände bringen. So übst du im Hin und Her, nicht mit einem fertigen Skript."
+        ],
+        "aus": [
+          "nicht",
+          "Ein ausgearbeitetes Gesprächsskript fühlt sich nach Vorbereitung an, ersetzt aber die eigene Auseinandersetzung. Im Gespräch zählen deine Worte."
+        ],
+        "leit": [
+          "nicht",
+          "Ein Gespräch, das du selbst führst, läuft nicht nebenher."
+        ]
+      },
+      "kippen": "Wenn ein glattes Skript sich nach Vorbereitung anfühlt und du im echten Gespräch nur noch abliest.",
+      "auftrag": "Spiele eine skeptische Bereichsleitung, die einen eingespielten Ablauf ungern ändert. Ich schlage gleich eine Änderung vor. Reagiere mit konkreten Einwänden und Nachfragen, wie sie in einem echten Gespräch kommen könnten. Bleib in der Rolle, bis ich das Gespräch beende. Sag mir danach, welche Einwände ich noch nicht überzeugend beantwortet habe.",
+      "f": {
+        "own": [
+          true,
+          "Im Gespräch kommt es auf deine Argumente und deine Haltung an."
+        ],
+        "stakes": [
+          true,
+          "Vom Gespräch hängt ab, ob dein Vorschlag eine Chance bekommt."
+        ],
+        "safe": [
+          false,
+          "Folgenlos ist nur das Üben. Im echten Gespräch wären Fehler spürbar."
+        ],
+        "crit": [
+          false,
+          "Was ein überzeugendes Argument ist, zeigt sich erst im Gespräch."
+        ],
+        "quick": [
+          true,
+          "Ob ein Einwand realistisch ist, merkst du schnell."
+        ],
+        "zeit": [
+          true,
+          "Bis zum Termin bleibt eine Woche, auch für mehrere Übungsrunden."
+        ]
+      }
+    }
+  ],
+  "CARD": [
+    {
+      "n": 1,
+      "t": "Aufgabe und Ziel",
+      "f": [
+        {
+          "id": "aufgabe",
+          "l": "Wofür wird das Ergebnis gebraucht, und was soll besser werden?",
+          "ex": "Aus drei Angeboten, dem Protokoll und einer Mail der Leitung soll ein Überblick für die Entscheidung am Freitag entstehen.",
+          "chips": []
+        },
+        {
+          "id": "nichtziel",
+          "l": "Was soll ausdrücklich außerhalb des Auftrags bleiben (Nicht-Ziel)?",
+          "ex": "Keine Empfehlung, welches Angebot es wird.",
+          "chips": [
+            "Keine Empfehlung.",
+            "Keine Entscheidung.",
+            "Nichts ergänzen, was nicht in den Unterlagen steht."
+          ]
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "t": "Zusammenarbeit",
+      "f": [
+        {
+          "id": "zusammenarbeit",
+          "l": "Was übernimmt KI, was gestalten und entscheiden wir selbst? Was willst du selbst können oder verantworten?",
+          "ex": "Das System stellt die Angebote gegenüber. Kriterien, Gewichtung und Entscheidung bleiben bei dir.",
+          "hint": "Die passende Form wählst du in Station 2. Das Feld darf bis dahin offen bleiben.",
+          "chips": []
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "t": "Grundlagen und Grenzen",
+      "f": [
+        {
+          "id": "grenzen",
+          "l": "Welcher Kontext ist nötig, aktuell und verbindlich? Welche Daten sind erlaubt, und wem machst du transparent, dass KI beteiligt war?",
+          "ex": "Maßgeblich sind die drei Angebote und die Mail der Leitung, das Protokoll liefert Hintergrund. Wer den Überblick bekommt, erfährt, dass er mit KI vorbereitet wurde.",
+          "link": "arbeitsrahmen",
+          "chips": []
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "t": "Qualität und nächster Versuch",
+      "f": [
+        {
+          "id": "qualitaet",
+          "l": "Woran erkennst du ein brauchbares Ergebnis, wer prüft was, und welcher nächste Versuch folgt?",
+          "ex": "Ich öffne die Belege und gebe frei, bevor es zur Leitung geht. Erster Versuch: Reicht der Überblick für Freitag?",
+          "hint": "Du kannst das Feld nach deinem Versuch in Station 3 ergänzen.",
+          "chips": [
+            "Ich öffne wichtige Belege selbst.",
+            "Wenn es zu sicher klingt, frage ich nach Unsicherheiten.",
+            "Was ich nicht prüfen kann, nutze ich nicht als alleinige Grundlage."
+          ]
+        }
+      ]
+    }
+  ],
+  "HANDGRIFFE": [
+    [
+      "Verwendung klären",
+      "Beschreibe, wer das Ergebnis wofür braucht."
+    ],
+    [
+      "Ziel und Nicht-Ziel benennen",
+      "Sage, was entstehen soll und was außerhalb des Auftrags liegt."
+    ],
+    [
+      "Unkompliziert beginnen",
+      "Schreibe oder sprich dein Anliegen zunächst in eigenen Worten ein."
+    ],
+    [
+      "Offen fragen",
+      "Lasse relevante Lücken klären; frage bei Urteilen nach Gründen und Gegenargumenten."
+    ],
+    [
+      "Kontext kennzeichnen",
+      "Wähle relevantes Material und sage, was aktuell, verbindlich oder Hintergrund ist."
+    ],
+    [
+      "Zusammenarbeit vereinbaren",
+      "Kläre Beiträge, eigenen Lernwunsch und passende Prüfpunkte."
+    ],
+    [
+      "Für die Verwendung prüfen",
+      "Öffne wichtige Belege selbst und teste, wo Fehler Folgen hätten."
+    ],
+    [
+      "Gezielt nachsteuern",
+      "Benenne Stelle, Kriterium oder falsche Annahme; sichere bei Bedarf den Arbeitsstand."
+    ]
+  ],
+  "VERGLEICHE": [
+    [
+      "Auftrag",
+      "Fasse die Unterlagen zusammen.",
+      "Zeige geklärte Punkte, offene Fragen und Widersprüche zur Vorbereitung einer Entscheidung. Gib keine Empfehlung ab."
+    ],
+    [
+      "Frage",
+      "Das ist die beste Lösung, oder?",
+      "Was spricht dafür, was dagegen, und welche Annahmen beeinflussen die Bewertung?"
+    ],
+    [
+      "Rückmeldung",
+      "Mach das besser.",
+      "Im zweiten Abschnitt sind Fakten und Vermutungen vermischt. Trenne beides und behalte die übrige Struktur bei."
+    ]
+  ],
+  "REGELN": [
+    {
+      "id": "r1",
+      "t": "Trenne Fakten und Vermutungen sichtbar und erfinde nichts.",
+      "on": true
+    },
+    {
+      "id": "r2",
+      "t": "Benenne fehlende Informationen, statt Lücken zu füllen.",
+      "on": true
+    },
+    {
+      "id": "r3",
+      "t": "Nimm mir keine Entscheidung ab. Zeige Optionen und Kriterien.",
+      "on": true
+    },
+    {
+      "id": "r4",
+      "t": "Antworte knapp und ohne Floskeln.",
+      "on": false
+    },
+    {
+      "id": "r5",
+      "t": "Zeige zuerst, welche Unterlagen du nutzt und welche Widersprüche offen sind. Warte vor der Ausarbeitung auf meine Rückmeldung.",
+      "on": true
+    }
+  ],
+  "AUSGANG": [
+    {
+      "v": "gut",
+      "t": "Passt im Wesentlichen",
+      "tag": ""
+    },
+    {
+      "v": "ruder",
+      "t": "Eine Stelle stimmt nicht",
+      "tag": "Ruder"
+    },
+    {
+      "v": "kurs",
+      "t": "Geht an meiner Frage vorbei",
+      "tag": "Kurs"
+    },
+    {
+      "v": "boot",
+      "t": "Mir wird zu viel abgenommen",
+      "tag": "Boot"
+    }
+  ],
+  "DIAG": {
+    "gut": "Gut. Halte unten fest, woran du das erkannt hast. Das ist dein Prüfkriterium für die Karte.",
+    "ruder": "Du musst nicht neu anfangen. Sag gezielt, was sich ändern soll: Stelle, Kriterium und Grenze.",
+    "kurs": "Dann liegt es am Auftrag, nicht an einer einzelnen Stelle. Schärfe Aufgabe und Nicht-Ziel und erstelle den Auftrag neu.",
+    "boot": "Dann wechsle die Form, eine näher zu dir: Lass dir zuerst Fragen stellen, statt ein Ergebnis zu bekommen."
+  },
+  "BEITRAG": [
+    {
+      "t": "Gegenüberstellen",
+      "task": "Stelle die Unterlagen nebeneinander: Wo stimmen sie überein, wo widersprechen sie sich?"
+    },
+    {
+      "t": "Formulierung vorschlagen",
+      "task": "Schlage mir zwei bis drei Formulierungen für den Abschnitt vor, den ich unten einfüge. Ich entscheide, welche ich übernehme."
+    },
+    {
+      "t": "Nach Themen ordnen",
+      "task": "Ordne die Angaben in meinem Material nach Themen und nenne zu jedem Thema die Fundstellen. Bewerte nichts."
+    },
+    {
+      "t": "Gliederung vorschlagen",
+      "task": "Schlage eine Gliederung mit drei bis fünf Abschnitten vor. Schreibe noch keine Inhalte."
+    },
+    {
+      "t": "Offene Fragen finden",
+      "task": "Welche Fragen sind in meinem Material noch offen? Liste sie auf, ohne sie zu beantworten."
+    }
+  ],
+  "BOOTSATZ": "Stell mir zuerst drei Fragen, die ich klären sollte, bevor du weiterarbeitest. Liefere noch kein Ergebnis."
+};
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var W = window.WS;
+
+  /* Links vor Veröffentlichung ergänzen. Leer = gelber Platzhalter in der Oberfläche. */
+  var LINKS = { arbeitsrahmen: 'https://confluence.hpi.de/x/rgd6Ew', toolhilfe: '' };
+  var LINKNAME = { arbeitsrahmen: 'KI-Richtlinie des HPI', toolhilfe: 'Toolhilfe' };
+  var LINKTEXT = { toolhilfe: 'Toolhilfe in Lektion 5.3' }; /* ohne URL: schlichter Verweis */
+
+  /* ---------- Hilfen ---------- */
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function form(id) { return W.FORMS.filter(function (f) { return f.id === id; })[0]; }
+  function linkHtml(k) {
+    return LINKS[k] ? '<a href="' + esc(LINKS[k]) + '" target="_blank" rel="noopener">' + LINKNAME[k] + '</a>'
+      : (LINKTEXT[k] ? esc(LINKTEXT[k]) : '<span class="placeholder">[Link zum ' + LINKNAME[k] + ' ergänzen]</span>');
+  }
+  var liveEl, toastTimer;
+  function announce(t) { liveEl.textContent = ''; setTimeout(function () { liveEl.textContent = t; }, 40); }
+  function toast(t) {
+    var el = $('#toast'); el.textContent = t; el.classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { el.classList.remove('show'); }, 1700);
+  }
+  function seg(el, name, opts, cur) {
+    el.innerHTML = opts.map(function (o) {
+      return '<label><input type="radio" name="' + name + '" value="' + o[0] + '"' + (cur === o[0] ? ' checked' : '') + '><span>' + esc(o[1]) + '</span></label>';
+    }).join('');
+  }
+
+  /* ---------- Zustand (nur im Arbeitsspeicher) ---------- */
+  var S = {
+    card: { aufgabe: '', nichtziel: '', zusammenarbeit: '', grenzen: '', qualitaet: '' },
+    side: 'front', scen: 0, pick: {}, why: {}, shown: {},
+    own: '', ownTri: '', regeln: {}, auftrag: '', ausgang: '', sp: 'robust', spPrompt: '', dirty: false
+  };
+  W.SCEN.forEach(function (s) { S.why[s.id] = {}; });
+  W.REGELN.forEach(function (r) { S.regeln[r.id] = r.on; });
+  var CORE = W.SCEN.filter(function (s) { return s.core; }).length;
+
+  /* ---------- Karte ---------- */
+  var SHORT = { aufgabe: 'Wofür, und was soll besser werden', nichtziel: 'Nicht-Ziel', zusammenarbeit: 'Zusammenarbeit', grenzen: 'Kontext, erlaubte Daten, Transparenz', qualitaet: 'Woran brauchbar, wer prüft, nächster Versuch' };
+  function val(k) { var v = (S.card[k] || '').trim(); return v || '(noch offen)'; }
+  function frontText() {
+    return W.CARD.map(function (sec) {
+      return sec.n + ' ' + sec.t.toUpperCase() + '\n' + sec.f.map(function (f) { return (sec.f.length > 1 ? SHORT[f.id] + ': ' : '') + val(f.id); }).join('\n');
+    }).join('\n\n');
+  }
+  function backText() {
+    var t = 'ACHT HANDGRIFFE FÜR DIE PRAXIS\n';
+    W.HANDGRIFFE.forEach(function (h, i) { t += (i + 1) + '. ' + h[0] + '. ' + h[1] + '\n'; });
+    t += '\nDREI FORMULIERUNGSVERGLEICHE\n';
+    W.VERGLEICHE.forEach(function (v) { t += v[0] + ': Aus „' + v[1].replace(/\.$/, '') + '“ wird „' + v[2] + '“\n'; });
+    return t.trim();
+  }
+  function labor() {
+    var l = [];
+    if (S.card.aufgabe.trim()) l.push(S.card.aufgabe.trim());
+    ['#labor2', '#labor3'].forEach(function (s) { var v = $(s).value.trim(); if (v) l.push(v); });
+    return l;
+  }
+  function endText() {
+    var t = '# Meine Kompass-Karte\nKI-Kompass am HPI · Deine KI-Werkstatt\n\n';
+    W.CARD.forEach(function (sec) {
+      t += '## ' + sec.n + ' ' + sec.t + '\n';
+      sec.f.forEach(function (f) { t += (sec.f.length > 1 ? SHORT[f.id] + ': ' : '') + val(f.id) + '\n'; });
+      t += '\n';
+    });
+    t += '## Rückseite\n' + backText() + '\n\n';
+    t += '---\nANHANG\n\n';
+    var l = labor();
+    t += '## Mögliche Aufgaben fürs Grundlagen-Labor\n' + (l.length ? l.map(function (x, i) { return (i + 1) + '. ' + x; }).join('\n') : '(noch offen)') + '\n';
+    if (S.auftrag) t += '\n## Mein Auftrag für die Zuarbeit\n' + S.auftrag + '\n';
+    if (S.spPrompt) t += '\n## Mein Sparring-Prompt\n' + S.spPrompt + '\n';
+    var n = $('#notes').value.trim();
+    if (n) t += '\n## Notizen\n' + n + '\n';
+    return t.replace(/\n{3,}/g, '\n\n').trim() + '\n';
+  }
+  function warnings() {
+    var all = Object.keys(S.card).map(function (k) { return S.card[k]; }).join('\n') + $('#labor2').value + $('#labor3').value + $('#notes').value + $('#spMain').value + $('#spCtx').value + $('#zuTask').value;
+    var w = [];
+    if (/[\w.+\-]+@[\w\-]+\.[\w.\-]+/.test(all)) w.push('Es sieht so aus, als stünde eine E-Mail-Adresse in deinen Einträgen. Entferne sie, wenn sie nicht hineingehört.');
+    if (/\d{6,}/.test(all.replace(/[\s.\-\/]/g, ''))) w.push('In deinen Einträgen steht eine längere Zahlenfolge, etwa eine Telefon- oder Kennnummer. Prüfe, ob du sie weitergeben darfst.');
+    return w;
+  }
+  function refreshCard() {
+    $('#cardPre').textContent = S.side === 'front' ? frontText() : backText();
+    $('#endPre').textContent = endText();
+    var w = warnings();
+    $('#warn').innerHTML = w.length ? '<div class="warn-box"><strong>Bitte prüfen</strong><ul>' + w.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>' : '';
+    var a = S.card.aufgabe.trim();
+    $('#ownRef').innerHTML = a ? 'Deine Aufgabe aus Feld 1: <strong>„' + esc(a) + '“</strong>' : 'Trag in Station 1 deine Aufgabe ein. Du kannst die Frage auch jetzt schon für eine Aufgabe im Kopf beantworten.';
+    $('#laborFirst').innerHTML = a ? 'Aufgabe 1 ist deine Aufgabe aus der Karte: „' + esc(a) + '“' : 'Aufgabe 1 übernimmt die Werkstatt aus Feld 1 deiner Karte, sobald du sie einträgst.';
+    renderFromCard(); renderStatus();
+  }
+  function renderStatus() {
+    $('#statusList').innerHTML = W.CARD.map(function (sec) {
+      var filled = sec.f.filter(function (f) { return (S.card[f.id] || '').trim(); }).length, all = sec.f.length;
+      var ok = filled === all, part = filled > 0 && !ok;
+      return '<li class="' + (ok ? 'ok' : (part ? 'part' : 'open')) + '"><span class="st-sym" aria-hidden="true">' + (ok ? '✓' : (part ? '½' : '○')) + '</span><span><strong>Feld ' + sec.n + ' · ' + esc(sec.t) + '</strong>' +
+        (ok ? ' ausgefüllt' : ' <a href="#c-' + sec.f[part ? all - 1 : 0].id + '">' + (part ? 'teilweise, ergänzen' : 'noch offen, ergänzen') + '</a>') + '</span></li>';
+    }).join('');
+  }
+
+  /* ---------- Station 1 ---------- */
+  function renderStation1() {
+    var h = '';
+    W.CARD.forEach(function (sec) {
+      h += '<fieldset class="form-section card-sec"><legend>Feld ' + sec.n + ' · ' + esc(sec.t) + '</legend>';
+      sec.f.forEach(function (f) {
+        var id = 'c-' + f.id;
+        h += '<div class="card-field"><label for="' + id + '">' + esc(f.l) + '</label>' +
+          '<p class="example" id="ex-' + f.id + '"><span>Beispiel</span> ' + esc(f.ex) + '</p>' +
+          '<textarea id="' + id + '" data-card="' + f.id + '" rows="2" aria-describedby="ex-' + f.id + (f.hint ? ' hi-' + f.id : '') + '"></textarea>';
+        if (f.hint) h += '<p class="field-help small" id="hi-' + f.id + '">' + esc(f.hint) + '</p>';
+        if (f.link) h += '<p class="field-help small">Was erlaubt ist, regelt die ' + linkHtml(f.link) + '.</p>';
+        if (f.chips.length) {
+          h += '<div class="chip-group add-chips" role="group" aria-label="Formulierungen ergänzen">' + f.chips.map(function (c) {
+            return '<button type="button" class="chip" data-add="' + f.id + '" data-text="' + esc(c) + '" aria-label="Ergänzen: ' + esc(c) + '">+ ' + esc(c) + '</button>';
+          }).join('') + '</div>';
+        }
+        h += '</div>';
+      });
+      h += '</fieldset>';
+    });
+    $('#cardFields').innerHTML = h;
+  }
+  function setSide(side, focus) {
+    S.side = side;
+    $$('.tabs [role=tab]').forEach(function (t) {
+      var on = t.getAttribute('data-side') === side;
+      t.classList.toggle('active', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+    });
+    $('#cardPre').setAttribute('aria-labelledby', side === 'front' ? 'tab-front' : 'tab-back');
+    refreshCard();
+  }
+
+  /* ---------- Station 2: Situationen ---------- */
+  function badge(st) {
+    var sym = { gut: '✓', bedingt: '!', nicht: '✕' }[st];
+    return '<span class="st-badge st-' + st + '"><span aria-hidden="true">' + sym + '</span> ' + W.STATUS[st] + '</span>';
+  }
+  function renderScenario(focusTitle) {
+    var sc = W.SCEN[S.scen], id = sc.id, extra = !sc.core;
+    $('#scenarioCount').textContent = extra ? 'Zusatzsituation ' + (S.scen - CORE + 1) + ' von ' + (W.SCEN.length - CORE) : 'Situation ' + (S.scen + 1) + ' von ' + CORE;
+    $('#scenarioArea').textContent = sc.bereich;
+    $('#scenarioTitle').textContent = sc.title; $('#scenarioText').textContent = sc.text;
+    $('#scenarioKnow').innerHTML = sc.know.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('');
+    $('#modeChoice').innerHTML = W.FORMS.map(function (f) {
+      return '<label class="mode-opt"><input type="radio" name="pick" value="' + f.id + '"' + (S.pick[id] === f.id ? ' checked' : '') + '>' +
+        '<span><strong>' + esc(f.kurz) + '</strong><em>' + esc(f.name) + '</em><small>' + esc(f.frage) + '</small></span></label>';
+    }).join('');
+    $('#reasonChips').innerHTML = W.REASONS.map(function (r) {
+      return '<label class="chip-check"><input type="checkbox" value="' + r.id + '"' + (S.why[id][r.id] ? ' checked' : '') + '><span>' + esc(r.t) + '</span></label>';
+    }).join('');
+    $('#reasonFs').hidden = !S.pick[id];
+    $('#prevScenario').disabled = S.scen === 0;
+    $('#msgChoice').textContent = '';
+    var res = $('#recommendationResult');
+    if (S.shown[id] && S.pick[id]) { res.className = 'reco-card'; res.innerHTML = recoHtml(sc); }
+    else { res.className = 'empty-state'; res.innerHTML = '<div><p>Wähle links eine Form und zeige dann die Rückmeldung.</p><p class="disclaimer">Die Rückmeldung bezieht sich auf die Situation, wie sie beschrieben ist. Niemand sieht deine Antworten.</p></div>'; }
+    if (focusTitle) $('#scenarioTitle').focus();
+  }
+  function recoHtml(sc) {
+    var id = sc.id, pick = S.pick[id], f = form(pick), fb = sc.fb[pick], st = fb[0];
+    var good = sc.good.map(function (g) { return form(g).kurz; }).join(' oder ');
+    var h = '<header class="reco-summary"><div class="user-choice"><span>Deine Wahl</span><strong>' + esc(f.kurz) + '</strong>' + badge(st) + '</div>' +
+      '<div><span class="reco-label">Passt hier gut</span><h3 id="recoTitle" tabindex="-1">' + esc(good) + '</h3><p>Bei dir bleibt: ' + esc(sc.human) + '</p></div></header>';
+    var nearer = (st !== 'gut' && W.NEARER[pick]) ? form(W.NEARER[pick]) : null;
+    h += '<section class="reco-main"><span class="reco-label">Zu deiner Wahl</span><p>' + esc(fb[1]) + '</p>' +
+      (nearer ? '<p class="nearer">Faustregel: Im Zweifel eine Form näher zum Menschen, hier also ' + esc(nearer.kurz) + '.</p>' : '') + '</section>';
+    var chosen = W.REASONS.filter(function (r) { return S.why[id][r.id]; });
+    h += '<section class="reco-reasons"><span class="reco-label">Zu deinen Gründen</span>';
+    if (!chosen.length) h += '<p>Du hast keinen Grund gewählt. Mit Gründen wird die Rückmeldung genauer, denn begründet wird mit Ziel, Folgen und Voraussetzungen.</p>';
+    else {
+      h += '<ul class="reasons">';
+      chosen.forEach(function (r) {
+        var fact = sc.f[r.id] || [null, 'Dazu sagt die Situation nichts.'], v = fact[0], verdict, cls;
+        if (v === true) {
+          if (r.pro.indexOf(pick) > -1) { verdict = 'trifft zu und spricht für ' + f.kurz; cls = 'ok'; }
+          else if (r.contra.indexOf(pick) > -1) { verdict = 'trifft zu, spricht aber gegen ' + f.kurz + ': ein Zielkonflikt'; cls = 'warn'; }
+          else { verdict = 'trifft zu'; cls = 'ok'; }
+        } else if (v === false) { verdict = 'trifft hier nicht zu'; cls = 'no'; }
+        else { verdict = 'steht nicht fest'; cls = 'open'; }
+        h += '<li class="r-' + cls + '"><span class="r-sym" aria-hidden="true">' + { ok: '✓', warn: '!', no: '✕', open: '?' }[cls] + '</span><div><strong>' + esc(r.t) + '</strong><span class="verdict">' + esc(verdict.charAt(0).toUpperCase() + verdict.slice(1)) + '.</span><span class="why">' + esc(fact[1]) + '</span></div></li>';
+      });
+      h += '</ul>';
+    }
+    var miss = f.req.filter(function (k) { return !S.why[id][k]; });
+    if (miss.length) {
+      var v = sc.f[miss[0]] ? sc.f[miss[0]][0] : null;
+      h += '<p class="req-line"><strong>' + esc(f.kurz) + ' braucht:</strong> ' + esc(f.vor) + ' Hier: ' + (v === true ? 'gegeben' : (v === false ? 'nicht gegeben' : 'offen')) + '.</p>';
+    }
+    h += '</section><section class="reco-kippen"><span class="reco-label">Wo es kippen kann</span><p>' + esc(sc.kippen) + '</p></section>';
+    h += '<details class="reco-auftrag"><summary>Ein Auftrag für diese Situation</summary><div class="reco-prompt"><div class="reco-prompt-head"><span class="reco-label">Zum Kopieren</span>' +
+      '<button class="button mini copy-reco-prompt" type="button" data-copy="recoPrompt">Kopieren</button></div><pre class="prompt-box" id="recoPrompt" tabindex="0">' + esc(sc.auftrag) + '</pre>' +
+      '<p class="prompt-note">Füge nur Material ein, das du verwenden darfst.</p></div></details>';
+    var i = S.scen, n = W.SCEN.length, b = '';
+    if (i < CORE - 1) b = '<button class="button primary" type="button" data-go="next">Nächste Situation</button>';
+    else if (i === CORE - 1) b = '<button class="button ghost-btn" type="button" data-go="next">Drei weitere Situationen (optional)</button><button class="button primary" type="button" data-go="own">Weiter zu deiner Aufgabe</button>';
+    else if (i < n - 1) b = '<button class="button ghost-btn" type="button" data-go="next">Nächste Zusatzsituation</button><button class="button primary" type="button" data-go="own">Weiter zu deiner Aufgabe</button>';
+    else b = '<button class="button primary" type="button" data-go="own">Weiter zu deiner Aufgabe</button>';
+    return h + '<div class="reco-next">' + b + '</div>';
+  }
+  function showReco() {
+    var sc = W.SCEN[S.scen];
+    if (!S.pick[sc.id]) { $('#msgChoice').textContent = 'Wähle zuerst eine Form, mit der du beginnen würdest.'; var r = $('#modeChoice input'); if (r) r.focus(); return; }
+    S.shown[sc.id] = true; renderScenario(false);
+    var t = $('#recoTitle'); if (t) t.focus();
+  }
+  function goOwn() { var h = $('#ownH'); h.scrollIntoView({ behavior: 'smooth', block: 'start' }); h.focus({ preventScroll: true }); }
+
+  /* ---------- Station 2: deine Aufgabe ---------- */
+  function renderOwn() {
+    $('#ownChoice').innerHTML = W.FORMS.map(function (f) {
+      return '<label class="mode-opt"><input type="radio" name="own" value="' + f.id + '"' + (S.own === f.id ? ' checked' : '') + '><span><strong>' + esc(f.kurz) + '</strong><em>' + esc(f.name) + '</em></span></label>';
+    }).join('');
+  }
+  function ownUpdate() {
+    var f = form(S.own); if (!f) return;
+    $('#ownReq').innerHTML = '<p class="req-box"><strong>' + esc(f.kurz) + ' braucht:</strong> ' + esc(f.vor) + '</p>';
+    $('#ownTri').hidden = false;
+    $('#ownTriL').textContent = 'Trifft das bei deiner Aufgabe zu?';
+    if (!$('#segOwn').children.length) seg($('#segOwn'), 'ownTri', [['ja', 'Ja'], ['unsicher', 'Unsicher'], ['nein', 'Nein']], S.ownTri);
+    var n = W.NEARER[f.id] ? form(W.NEARER[f.id]).kurz : '', t = '';
+    if (S.ownTri === 'ja') t = 'Dann ist ' + f.kurz + ' ein guter Start. Leg schon jetzt fest, woran du merken würdest, dass es verrutscht.';
+    if (S.ownTri === 'unsicher') t = f.id === 'eigen' ? 'Kläre, ob du die Zeit hast, oder schneide die Aufgabe kleiner.' : 'Kläre das zuerst. Bis dahin beginnst du besser eine Form näher am Menschen: ' + n + '.';
+    if (S.ownTri === 'nein') t = f.id === 'eigen' ? 'Ohne Zeit hilft es, die Aufgabe kleiner zu schneiden oder einzelne Bausteine als Zuarbeit zu holen.' : 'Dann hilft nicht mehr Anstrengung, sondern eine andere Form, im Zweifel ' + n + '.';
+    $('#ownOut').innerHTML = t ? '<p class="soft-out">' + esc(t) + '</p>' : '';
+  }
+  function ownAdd() {
+    var f = form(S.own); if (!f) { toast('Wähle zuerst eine Form.'); return; }
+    var tri = { ja: 'gegeben', unsicher: 'noch offen', nein: 'nicht gegeben' }[S.ownTri] || 'noch offen';
+    var line = 'Form: ' + f.kurz + ' (' + f.name.charAt(0).toLowerCase() + f.name.slice(1) + '). Voraussetzung: ' + f.vor.replace(/\.$/, '') + ' (' + tri + ').';
+    var cur = S.card.zusammenarbeit.split('\n').filter(function (l) { return l.indexOf('Form: ') !== 0; }).join('\n').trim();
+    S.card.zusammenarbeit = line + (cur ? '\n' + cur : ''); S.dirty = true;
+    $$('[data-card="zusammenarbeit"]').forEach(function (o) { o.value = S.card.zusammenarbeit; });
+    refreshCard(); toast('Steht jetzt in Feld 2 deiner Karte');
+  }
+
+  /* ---------- Station 3 ---------- */
+  function renderStation3() {
+    $('#beitragChips').innerHTML = W.BEITRAG.map(function (b, i) {
+      return '<button type="button" class="chip" data-beitrag="' + i + '" aria-label="Beispiel übernehmen: ' + esc(b.t) + '">' + esc(b.t) + '</button>';
+    }).join('');
+    $('#regeln').innerHTML = W.REGELN.map(function (r) {
+      return '<label class="check"><input type="checkbox" data-regel="' + r.id + '"' + (r.on ? ' checked' : '') + '> ' + esc(r.t) + '</label>';
+    }).join('');
+    $('#ausgang').innerHTML = W.AUSGANG.map(function (a) {
+      return '<label class="mode-opt rkb-opt"><input type="radio" name="ausgang" value="' + a.v + '"><span><strong>' + esc(a.t) + '</strong>' + (a.tag ? '<small>' + esc(a.tag) + '</small>' : '<small>&nbsp;</small>') + '</span></label>';
+    }).join('');
+    $('#bootPre').textContent = W.BOOTSATZ;
+  }
+  function renderFromCard() {
+    var items = [['aufgabe', 'Aufgabe und Ziel'], ['nichtziel', 'Nicht-Ziel'], ['grenzen', 'Grundlagen'], ['qualitaet', 'So prüfst du']];
+    $('#fromCard').innerHTML = items.map(function (x) {
+      var v = (S.card[x[0]] || '').trim();
+      return '<li><strong>' + x[1] + ':</strong> ' + (v ? esc(v) : '<span class="open-tag">offen</span> <a href="#c-' + x[0] + '">in der Karte ergänzen</a>') + '</li>';
+    }).join('');
+  }
+  function buildAuftrag() {
+    var task = $('#zuTask').value.trim();
+    if (!task) { $('#msgAssist').textContent = 'Beschreibe zuerst, welchen Beitrag du brauchst, oder tippe ein Beispiel an.'; $('#zuTask').focus(); return; }
+    $('#msgAssist').textContent = '';
+    var c = S.card;
+    function p(v, ph) { v = (v || '').trim(); return v || '[' + ph + ']'; }
+    var t = 'Ich arbeite an: ' + p(c.aufgabe, 'Wofür wird das Ergebnis gebraucht?') + '\n' +
+      'Nicht Teil des Auftrags: ' + p(c.nichtziel, 'Nicht-Ziel ergänzen') + '\n\n' +
+      'Ich steuere selbst und brauche von dir nur diesen Beitrag: ' + task + '\n\n' +
+      'Grundlage: ' + p(c.grenzen, 'Was ist verbindlich, was nur Hintergrund?') + '\n' +
+      'So prüfe ich das Ergebnis: ' + p(c.qualitaet, 'Prüfweg ergänzen') + '\n';
+    var rules = W.REGELN.filter(function (r) { return S.regeln[r.id]; });
+    if (rules.length) t += '\nBitte beachte:\n' + rules.map(function (r) { return '- ' + r.t; }).join('\n') + '\n';
+    t += '\n[Material einfügen, nur was du verwenden darfst]';
+    S.auftrag = t; S.dirty = true; $('#assistPre').textContent = t;
+    var ap = $('#afterPanel'), first = ap.hidden; ap.hidden = false;
+    refreshCard(); $('#assistPre').focus();
+    announce(first ? 'Auftrag erstellt. Kopiere ihn in einen neuen Chat bei ChatGPT. Darunter kannst du die Antwort einordnen.' : 'Auftrag aktualisiert.');
+  }
+  function diag() {
+    var d = W.DIAG[S.ausgang]; if (!d) return;
+    $('#diagOut').innerHTML = '<div class="diag"><p>' + esc(d) + '</p></div>';
+    $('#fbBuilder').hidden = S.ausgang !== 'ruder';
+    $('#kursBranch').hidden = S.ausgang !== 'kurs';
+    $('#bootBranch').hidden = S.ausgang !== 'boot';
+    $('#sharpen').hidden = false;
+  }
+  function fbCompose() {
+    var s = $('#fbStelle').value.trim(), k = $('#fbKrit').value.trim(), g = $('#fbGrenze').value.trim();
+    function fin(x) { return /[.!?]$/.test(x) ? x : x + '.'; }
+    var first = [s, k].filter(Boolean).join(' ');
+    $('#fbPre').textContent = first ? fin(first) + ' ' + fin(g || 'Lass den Rest unverändert') : 'Fülle die drei Teile aus.';
+  }
+
+  /* ---------- Station 4: Formate und Prompts unverändert aus dem Human-AI Readiness Sprint ---------- */
+  var sparringFormats = {
+    robust: {
+      title: 'Robustheits-Check', nr: '01', card: 'Für Ideen, Strategien und Entscheidungen. Kritisch-konstruktiv statt deprimierend.',
+      use: 'Mach eine Idee robuster: Stärken würdigen, Risiken prüfen, Verbesserungen ableiten.',
+      mainLabel: 'Idee, Strategie oder Entscheidung', mainPlaceholder: 'Beschreibe kurz, woran du arbeitest...',
+      contextLabel: 'Relevanter Kontext', contextPlaceholder: 'Zielgruppe, Ziel, aktueller Stand, Einschränkungen, Unsicherheiten...',
+      prompt: function (o) { return '# Robustheits-Check\n\nPrüfe meine Idee kritisch und konstruktiv. Dein Ziel ist nicht, sie zu zerstören, sondern sie robuster zu machen.\n\n## Idee / Entscheidung\n' + o.main + '\n\n## Kontext\n' + o.context + '\n\nBitte arbeite in fünf Schritten:\n1. Was ist an der Idee stark und sollte erhalten bleiben?\n2. Welche Annahmen sind riskant oder ungeprüft?\n3. Welche blinden Flecken, Gegenargumente oder Scheiterbedingungen siehst du?\n4. Was wären die drei wichtigsten Verbesserungen?\n5. Welche Frage muss ich als Nächstes beantworten, bevor ich weitermache?\n\nSei ehrlich, aber nicht demotivierend. Kritisiere klar und hilf mir, die Idee zu stärken.\n\nNach deiner Antwort werde ich meine Position verteidigen. Greife dann meine Verteidigung erneut konstruktiv an und hilf mir, eine bessere Version zu formulieren.'; }
+    },
+    layers: {
+      title: 'Schichten-Analyse', nr: '02', card: 'Für Annahmen, Glaubenssätze und unsichtbare Prämissen.',
+      use: 'Lege Annahmen, Glaubenssätze und verborgene Prämissen frei.',
+      mainLabel: 'Überzeugung oder Annahme', mainPlaceholder: 'z. B. Unsere Zielgruppe will kein Self-Service...',
+      contextLabel: 'Wo taucht diese Annahme auf?', contextPlaceholder: 'Projekt, Entscheidung, Besprechung, Marktannahme...',
+      prompt: function (o) { return '# Schichten-Analyse\n\nIch glaube aktuell:\n' + o.main + '\n\nKontext:\n' + o.context + '\n\nHilf mir, die Schichten darunter freizulegen:\n\nEbene 1: Warum glaube ich das bewusst?\nEbene 2: Welche Annahme muss wahr sein, damit das stimmt?\nEbene 3: Warum glaube ich, dass diese Annahme wahr ist?\nEbene 4-5: Grabe weiter. Was liegt darunter?\n\nPrüfe auf jeder Ebene:\n- Ist das wirklich wahr?\n- Woher könnte diese Überzeugung kommen?\n- Was wäre möglich, wenn sie falsch ist?\n\nAm Ende: Welche Annahme sollte ich testen, loslassen oder neu formulieren? Welche kleine Evidenz würde mir helfen?'; }
+    },
+    experts: {
+      title: 'Experten-Diskussion', nr: '03', card: 'Für strategische Fragen mit mehreren widersprüchlichen Perspektiven.',
+      use: 'Erzeuge Perspektivenvielfalt und eine robustere Synthese.',
+      mainLabel: 'Strategische Frage', mainPlaceholder: 'z. B. Sollten wir zuerst auf B2B oder B2C gehen?',
+      contextLabel: 'Perspektiven oder Spannungsfelder', contextPlaceholder: 'z. B. Wachstum vs. Qualität, Nutzerbedürfnis vs. Wirtschaftlichkeit, Risiko vs. Geschwindigkeit...',
+      prompt: function (o) { return '# Experten-Diskussion\n\nIch stehe vor folgender strategischer Frage:\n' + o.main + '\n\nKontext / Spannungsfelder:\n' + o.context + '\n\nInszeniere eine Debatte zwischen drei Expertinnen mit fundamental verschiedenen Überzeugungen. Wenn ich keine Rollen definiert habe, wähle drei wirklich unterschiedliche Perspektiven.\n\nAblauf:\n1. Jede Expertin stellt ihre stärksten Argumente vor.\n2. Sie greifen sich gegenseitig an.\n3. Sie verteidigen und schärfen ihre Positionen.\n4. Sie suchen nach einer robusten Synthese.\n\nAm Ende beantworte:\n- Welche Position ist am stärksten?\n- Welche hat blinde Flecken?\n- Welche Hybridlösung wäre am robustesten?\n- Welche Frage muss ich als Nächstes klären?\n\nWichtig: Vermeide Konsensbrei. Zeige echte Spannungen und eine begründete Empfehlung.'; }
+    }
+  };
+  function renderStation4() {
+    $('#sparringGrid').innerHTML = Object.keys(sparringFormats).map(function (k) {
+      var f = sparringFormats[k];
+      return '<label class="sparring-card' + (k === S.sp ? ' active' : '') + '"><input type="radio" name="spf" value="' + k + '"' + (k === S.sp ? ' checked' : '') + '>' +
+        '<span class="nr">' + f.nr + '</span><h3>' + esc(f.title) + '</h3><p>' + esc(f.card) + '</p></label>';
+    }).join('');
+    setSparring(S.sp);
+  }
+  function setSparring(k) {
+    S.sp = k; var f = sparringFormats[k];
+    $$('#sparringGrid .sparring-card').forEach(function (c) { c.classList.toggle('active', $('input', c).value === k); });
+    $('#sparringName').textContent = f.title; $('#sparringUse').textContent = f.use;
+    $('#sparringMainLabel').textContent = f.mainLabel; $('#sparringContextLabel').textContent = f.contextLabel;
+    $('#spMain').placeholder = f.mainPlaceholder; $('#spCtx').placeholder = f.contextPlaceholder;
+  }
+  function buildSparring() {
+    var main = $('#spMain').value.trim() || '[Beschreibe deine Idee, Annahme oder Frage]';
+    var context = $('#spCtx').value.trim() || '[Ergänze Zielgruppe, Ziel, Kontext, Einschränkungen oder relevante Spannungen]';
+    S.spPrompt = sparringFormats[S.sp].prompt({ main: main, context: context }); S.dirty = true;
+    $('#sparringResult').textContent = S.spPrompt; refreshCard();
+    $('#sparringResult').focus(); announce('Sparring-Prompt generiert. Du kannst ihn jetzt kopieren.');
+  }
+
+  /* ---------- Kopieren, Herunterladen, Drucken ---------- */
+  function copyText(text) {
+    function done(ok) { toast(ok ? 'Kopiert' : 'Kopieren nicht möglich. Markiere den Text und kopiere ihn von Hand.'); }
+    function fallback() {
+      try {
+        var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.left = '-999px';
+        document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
+      } catch (e) { done(false); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { done(true); }, fallback); else fallback();
+  }
+  function download() {
+    try {
+      var b = new Blob([endText()], { type: 'text/plain;charset=utf-8' }), a = document.createElement('a');
+      a.href = URL.createObjectURL(b); a.download = 'Meine-Kompass-Karte.txt'; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1500); toast('Download gestartet');
+    } catch (e) { toast('Herunterladen nicht möglich. Nutze Kopieren.'); }
+  }
+  function printCard() {
+    var h = '<h1>Meine Kompass-Karte</h1><p class="pc-sub">KI-Kompass am HPI · Deine KI-Werkstatt</p>';
+    W.CARD.forEach(function (sec) {
+      h += '<h2>' + sec.n + ' ' + esc(sec.t) + '</h2>';
+      sec.f.forEach(function (f) { h += '<p>' + (sec.f.length > 1 ? '<b>' + esc(SHORT[f.id]) + ':</b> ' : '') + esc(val(f.id)) + '</p>'; });
+    });
+    var l = labor();
+    if (l.length) { h += '<h2>Mögliche Aufgaben fürs Grundlagen-Labor</h2>'; l.forEach(function (x, i) { h += '<p>' + (i + 1) + '. ' + esc(x) + '</p>'; }); }
+    h += '<h2>Rückseite: Acht Handgriffe</h2>';
+    W.HANDGRIFFE.forEach(function (x, i) { h += '<p>' + (i + 1) + '. <b>' + esc(x[0]) + '.</b> ' + esc(x[1]) + '</p>'; });
+    $('#print-card').innerHTML = h; window.print();
+  }
+
+  /* ---------- Ereignisse ---------- */
+  function onInput(e) {
+    var el = e.target, ck = el.getAttribute && el.getAttribute('data-card');
+    if (ck) { S.card[ck] = el.value; S.dirty = true; $$('[data-card="' + ck + '"]').forEach(function (o) { if (o !== el) o.value = el.value; }); refreshCard(); return; }
+    var sc = W.SCEN[S.scen];
+    if (el.name === 'pick') {
+      S.pick[sc.id] = el.value; S.dirty = true; $('#msgChoice').textContent = '';
+      var fs = $('#reasonFs'); if (fs.hidden) { fs.hidden = false; announce('Wähle jetzt, was für dich den Ausschlag gibt.'); }
+      if (S.shown[sc.id]) refreshReco(); return;
+    }
+    if (el.closest && el.closest('#reasonChips')) { S.why[sc.id][el.value] = el.checked; if (S.shown[sc.id]) refreshReco(); return; }
+    if (el.name === 'own') { S.own = el.value; ownUpdate(); return; }
+    if (el.name === 'ownTri') { S.ownTri = el.value; ownUpdate(); return; }
+    if (el.hasAttribute && el.hasAttribute('data-regel')) { S.regeln[el.getAttribute('data-regel')] = el.checked; return; }
+    if (el.name === 'ausgang') { S.ausgang = el.value; diag(); return; }
+    if (el.id === 'fbStelle' || el.id === 'fbKrit' || el.id === 'fbGrenze') { fbCompose(); return; }
+    if (el.name === 'spf') { setSparring(el.value); return; }
+    if (el.id === 'zuTask') { S.dirty = true; $('#msgAssist').textContent = ''; refreshCard(); return; }
+    if (['notes', 'labor2', 'labor3', 'spMain', 'spCtx'].indexOf(el.id) > -1) { S.dirty = true; refreshCard(); }
+  }
+  function refreshReco() { $('#recommendationResult').innerHTML = recoHtml(W.SCEN[S.scen]); announce('Die Rückmeldung wurde an deine Auswahl angepasst.'); }
+  function onClick(e) {
+    var b = e.target.closest ? e.target.closest('button') : null; if (!b) return;
+    if (b.hasAttribute('data-copy')) { var src = document.getElementById(b.getAttribute('data-copy')); if (src) copyText(src.value || src.textContent); return; }
+    if (b.hasAttribute('data-add')) {
+      var k = b.getAttribute('data-add'), t = b.getAttribute('data-text'), cur = (S.card[k] || '').trim();
+      if (cur.indexOf(t) === -1) { S.card[k] = cur ? cur + ' ' + t : t; S.dirty = true; $$('[data-card="' + k + '"]').forEach(function (o) { o.value = S.card[k]; }); refreshCard(); announce('Ergänzt.'); }
+      return;
+    }
+    if (b.hasAttribute('data-side')) { setSide(b.getAttribute('data-side'), false); return; }
+    if (b.hasAttribute('data-beitrag')) { var bt = W.BEITRAG[+b.getAttribute('data-beitrag')]; $('#zuTask').value = bt.task; S.dirty = true; $('#msgAssist').textContent = ''; $('#zuTask').focus(); announce('Beispiel übernommen. Du kannst es anpassen.'); return; }
+    if (b.hasAttribute('data-go')) {
+      if (b.getAttribute('data-go') === 'own') goOwn();
+      else { S.scen = Math.min(W.SCEN.length - 1, S.scen + 1); renderScenario(true); $('#spiel .dilemma-panel').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      return;
+    }
+    switch (b.id) {
+      case 'prevScenario': S.scen = Math.max(0, S.scen - 1); renderScenario(true); break;
+      case 'showRecommendation': showReco(); break;
+      case 'ownAdd': ownAdd(); break;
+      case 'rebuild': buildAuftrag(); $('#assistPre').scrollIntoView({ behavior: 'smooth', block: 'center' }); break;
+      case 'dlBtn': download(); break;
+      case 'printBtn': printCard(); break;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    liveEl = document.createElement('div'); liveEl.className = 'sr-only'; liveEl.setAttribute('aria-live', 'polite'); liveEl.setAttribute('role', 'status'); document.body.appendChild(liveEl);
+    $$('[data-link]').forEach(function (el) { el.outerHTML = linkHtml(el.getAttribute('data-link')); });
+    renderStation1(); renderOwn(); renderStation3(); renderStation4();
+    renderScenario(false); refreshCard();
+    document.addEventListener('input', function (e) { e.target._wsT = Date.now(); onInput(e); });
+    document.addEventListener('change', function (e) {
+      var t = e.target; if (!(t.type === 'radio' || t.type === 'checkbox' || t.tagName === 'SELECT')) return;
+      if (t._wsT && Date.now() - t._wsT < 300) return; onInput(e);
+    });
+    document.addEventListener('click', onClick);
+    $$('.tabs [role=tab]').forEach(function (t) {
+      t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); setSide(S.side === 'front' ? 'back' : 'front', true); } });
+    });
+    $('#assistForm').addEventListener('submit', function (e) { e.preventDefault(); buildAuftrag(); });
+    $('#sparringForm').addEventListener('submit', function (e) { e.preventDefault(); buildSparring(); });
+    window.addEventListener('beforeunload', function (e) { if (S.dirty) { e.preventDefault(); e.returnValue = ''; } });
+    if ('IntersectionObserver' in window) {
+      var links = $$('.progress-nav a');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) links.forEach(function (a) { if (a.getAttribute('href') === '#' + en.target.id) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current'); });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      $$('.module').forEach(function (m) { io.observe(m); });
+    }
+  });
+})();
+
+</script>
+</body>
+</html>
